@@ -1,0 +1,373 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+		/* Begin PBXBuildFile section */
+		CA469587DB31537A84368C76 /* PlaylistImporterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112BB6008D245698BEFDCA54 /* PlaylistImporterApp.swift */; };
+		C1BE5A0FB8A3540FA9555145 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D96816509544C9CEB9703 /* KeychainHelper.swift */; };
+		0C695802A37A5AC4AF492751 /* StringSimilarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9C1FF026856C9AFA791BC /* StringSimilarity.swift */; };
+		2378F10D58495FA6827CC071 /* DurationCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7AFF80B9055AAEA857844E /* DurationCompare.swift */; };
+		13CC9678CE815AE3B5A758FB /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E0C6C543925799A629191E /* AppSettings.swift */; };
+		C23BB6A354335647A4FCD863 /* ImportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439DCFBBDC756E0AE35D044 /* ImportManager.swift */; };
+		791B3117CF5056DBB7EFDD15 /* PlexAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431651A3031057BE98C573B1 /* PlexAuthService.swift */; };
+		88960FE256195F46BF86D676 /* PlexAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC69D0530205D9B95467224 /* PlexAPIService.swift */; };
+		0C1D945B6B9E5F748D6CEDA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D5FA3C32D55E26BF5F7C8F /* ContentView.swift */; };
+		EFE67A56E0C153ADAF5FBBBD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D185D39695521691331FCB /* MainView.swift */; };
+		074F292C24DA552BAC780329 /* PlexServerSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F501305985B618634443B /* PlexServerSetupView.swift */; };
+		F58B82FB674A5F2EB5DAC100 /* PlaylistPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D0B6D7219C5886A338E675 /* PlaylistPickerView.swift */; };
+		335EDE1695A550D58E09A58B /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3246D546295353728A82F8E3 /* TrackListView.swift */; };
+		34462ED51704588EAA0BF713 /* ImportProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4C8534D30E59F5A5C905B3 /* ImportProgressView.swift */; };
+		A784A1D0023A5CC9AEC61419 /* PlexTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CE0D6834F854C2A0BDCBCC /* PlexTrack.swift */; };
+		0020FFE4DA815BCEA11A3228 /* PlexPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB33E40A83C596EA96A100D /* PlexPlaylist.swift */; };
+		996FF6E62B0253FEACB3616D /* PlexLibrarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A8AEF5B4845A2E815A4EC3 /* PlexLibrarySection.swift */; };
+		138686503A425139B71C0CD5 /* MusicTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7E6CF9CD152C1AADF2596 /* MusicTrack.swift */; };
+		73861D5418C35449A076732B /* MusicPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3675D250D45EA59ABCB693 /* MusicPlaylist.swift */; };
+		7C8CFCCB77CB5BC7B5284B77 /* MatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD45F669DF57B78CB85F05 /* MatchResult.swift */; };
+		47B87337D928567E985B7260 /* MusicLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5489E4CA1205486BFC45F2A /* MusicLibraryService.swift */; };
+		907A0531F21957EE9361C696 /* TrackMatchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7026B01B335DA2B57EBD18 /* TrackMatchingService.swift */; };
+		/* End PBXBuildFile section */
+
+		/* Begin PBXFileReference section */
+		34C6E33C92F956BA83173DE5 /* PlaylistImporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaylistImporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F9A575FFD1754D789609049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		233E2345949851F987B69789 /* PlaylistImporter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlaylistImporter.entitlements; sourceTree = "<group>"; };
+		112BB6008D245698BEFDCA54 /* PlaylistImporterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistImporterApp.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/PlaylistImporterApp.swift; sourceTree = "<absolute>"; };
+		DB5D96816509544C9CEB9703 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Helpers/KeychainHelper.swift; sourceTree = "<absolute>"; };
+		6DB9C1FF026856C9AFA791BC /* StringSimilarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringSimilarity.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Helpers/StringSimilarity.swift; sourceTree = "<absolute>"; };
+		4B7AFF80B9055AAEA857844E /* DurationCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DurationCompare.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Helpers/DurationCompare.swift; sourceTree = "<absolute>"; };
+		E5E0C6C543925799A629191E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppSettings.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Managers/AppSettings.swift; sourceTree = "<absolute>"; };
+		8439DCFBBDC756E0AE35D044 /* ImportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImportManager.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Managers/ImportManager.swift; sourceTree = "<absolute>"; };
+		431651A3031057BE98C573B1 /* PlexAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexAuthService.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Services/PlexAuthService.swift; sourceTree = "<absolute>"; };
+		EEC69D0530205D9B95467224 /* PlexAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexAPIService.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Services/PlexAPIService.swift; sourceTree = "<absolute>"; };
+		D7D5FA3C32D55E26BF5F7C8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/ContentView.swift; sourceTree = "<absolute>"; };
+		16D185D39695521691331FCB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/MainView.swift; sourceTree = "<absolute>"; };
+		799F501305985B618634443B /* PlexServerSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexServerSetupView.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/PlexServerSetupView.swift; sourceTree = "<absolute>"; };
+		79D0B6D7219C5886A338E675 /* PlaylistPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistPickerView.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/PlaylistPickerView.swift; sourceTree = "<absolute>"; };
+		3246D546295353728A82F8E3 /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackListView.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/TrackListView.swift; sourceTree = "<absolute>"; };
+		FB4C8534D30E59F5A5C905B3 /* ImportProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImportProgressView.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/ImportProgressView.swift; sourceTree = "<absolute>"; };
+		F7CE0D6834F854C2A0BDCBCC /* PlexTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexTrack.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/PlexTrack.swift; sourceTree = "<absolute>"; };
+		1FB33E40A83C596EA96A100D /* PlexPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexPlaylist.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/PlexPlaylist.swift; sourceTree = "<absolute>"; };
+		39A8AEF5B4845A2E815A4EC3 /* PlexLibrarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexLibrarySection.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/PlexLibrarySection.swift; sourceTree = "<absolute>"; };
+		07C7E6CF9CD152C1AADF2596 /* MusicTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicTrack.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/MusicTrack.swift; sourceTree = "<absolute>"; };
+		0E3675D250D45EA59ABCB693 /* MusicPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicPlaylist.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/MusicPlaylist.swift; sourceTree = "<absolute>"; };
+		79FD45F669DF57B78CB85F05 /* MatchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MatchResult.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/MatchResult.swift; sourceTree = "<absolute>"; };
+		F5489E4CA1205486BFC45F2A /* MusicLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicLibraryService.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Services/MusicLibraryService.swift; sourceTree = "<absolute>"; };
+		8F7026B01B335DA2B57EBD18 /* TrackMatchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackMatchingService.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Services/TrackMatchingService.swift; sourceTree = "<absolute>"; };
+		/* End PBXFileReference section */
+
+		/* Begin PBXFrameworksBuildPhase section */
+		88DFF0AD01FD5A8BAF633A41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		/* End PBXFrameworksBuildPhase section */
+
+		/* Begin PBXGroup section */
+C4DD3DEFDC2D5BAC98A4C6B5 /* Helpers */ = {
+	isa = PBXGroup;
+	children = (
+		DB5D96816509544C9CEB9703,
+		6DB9C1FF026856C9AFA791BC,
+		4B7AFF80B9055AAEA857844E,
+	);
+	name = Helpers;
+	sourceTree = "<group>";
+};
+707FFD3BF31C5B55B0F90437 /* Managers */ = {
+	isa = PBXGroup;
+	children = (
+		E5E0C6C543925799A629191E,
+		8439DCFBBDC756E0AE35D044,
+	);
+	name = Managers;
+	sourceTree = "<group>";
+};
+03379ABA64BE579A9FBD269A /* Models */ = {
+	isa = PBXGroup;
+	children = (
+		F7CE0D6834F854C2A0BDCBCC,
+		1FB33E40A83C596EA96A100D,
+		39A8AEF5B4845A2E815A4EC3,
+		07C7E6CF9CD152C1AADF2596,
+		0E3675D250D45EA59ABCB693,
+		79FD45F669DF57B78CB85F05,
+	);
+	name = Models;
+	sourceTree = "<group>";
+};
+6B0A2BEE832C5DCEBE0C5420 /* Services */ = {
+	isa = PBXGroup;
+	children = (
+		431651A3031057BE98C573B1,
+		EEC69D0530205D9B95467224,
+		F5489E4CA1205486BFC45F2A,
+		8F7026B01B335DA2B57EBD18,
+	);
+	name = Services;
+	sourceTree = "<group>";
+};
+754D0949D96F545493ADFF8A /* Views */ = {
+	isa = PBXGroup;
+	children = (
+		D7D5FA3C32D55E26BF5F7C8F,
+		16D185D39695521691331FCB,
+		799F501305985B618634443B,
+		79D0B6D7219C5886A338E675,
+		3246D546295353728A82F8E3,
+		FB4C8534D30E59F5A5C905B3,
+	);
+	name = Views;
+	sourceTree = "<group>";
+};
+43180F2084315839AC3FF2BB /* PlaylistImporter */ = {
+	isa = PBXGroup;
+	children = (
+		112BB6008D245698BEFDCA54,
+		C4DD3DEFDC2D5BAC98A4C6B5,
+		707FFD3BF31C5B55B0F90437,
+		03379ABA64BE579A9FBD269A,
+		6B0A2BEE832C5DCEBE0C5420,
+		754D0949D96F545493ADFF8A,
+		0F9A575FFD1754D789609049,
+		233E2345949851F987B69789,
+	);
+	name = PlaylistImporter;
+	sourceTree = "<group>";
+};
+7013C57BE10B537FA9AE666A /* Products */ = {
+	isa = PBXGroup;
+	children = (
+		34C6E33C92F956BA83173DE5,
+	);
+	name = Products;
+	sourceTree = "<group>";
+};
+871BAB2F288E55F9BDDF08FF /* = */ = {
+	isa = PBXGroup;
+	children = (
+		43180F2084315839AC3FF2BB,
+		7013C57BE10B537FA9AE666A,
+	);
+	sourceTree = "<group>";
+};
+		/* End PBXGroup section */
+
+		/* Begin PBXNativeTarget section */
+		FE1192F904F65CA7BAF45EEF /* PlaylistImporter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3147AF6185065BCEBD20E6DD /* Build configuration list for PBXNativeTarget */;
+			buildPhases = (
+				24A69F9C39A45DD9A2800D4A /* Sources */,
+				88DFF0AD01FD5A8BAF633A41 /* Frameworks */,
+				378DD99732915A73BD04FC66 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlaylistImporter;
+			packageProductDependencies = (
+			);
+			productName = PlaylistImporter;
+			productReference = 34C6E33C92F956BA83173DE5 /* PlaylistImporter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		/* End PBXNativeTarget section */
+
+		/* Begin PBXProject section */
+		008DCACC2DC65BEF8BB7A1F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					FE1192F904F65CA7BAF45EEF = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = CA6A12C1D56C571D82ECB417 /* Build configuration list for PBXProject */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = 871BAB2F288E55F9BDDF08FF;
+			minimumXcodeVersion = 16.0;
+			productRefGroup = 7013C57BE10B537FA9AE666A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE1192F904F65CA7BAF45EEF /* PlaylistImporter */,
+			);
+		};
+		/* End PBXProject section */
+
+		/* Begin PBXResourcesBuildPhase section */
+		378DD99732915A73BD04FC66 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		/* End PBXResourcesBuildPhase section */
+
+		/* Begin PBXSourcesBuildPhase section */
+		24A69F9C39A45DD9A2800D4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA469587DB31537A84368C76 /* PlaylistImporterApp.swift in Sources */,
+				C1BE5A0FB8A3540FA9555145 /* KeychainHelper.swift in Sources */,
+				0C695802A37A5AC4AF492751 /* StringSimilarity.swift in Sources */,
+				2378F10D58495FA6827CC071 /* DurationCompare.swift in Sources */,
+				13CC9678CE815AE3B5A758FB /* AppSettings.swift in Sources */,
+				C23BB6A354335647A4FCD863 /* ImportManager.swift in Sources */,
+				791B3117CF5056DBB7EFDD15 /* PlexAuthService.swift in Sources */,
+				88960FE256195F46BF86D676 /* PlexAPIService.swift in Sources */,
+				0C1D945B6B9E5F748D6CEDA8 /* ContentView.swift in Sources */,
+				EFE67A56E0C153ADAF5FBBBD /* MainView.swift in Sources */,
+				074F292C24DA552BAC780329 /* PlexServerSetupView.swift in Sources */,
+				F58B82FB674A5F2EB5DAC100 /* PlaylistPickerView.swift in Sources */,
+				335EDE1695A550D58E09A58B /* TrackListView.swift in Sources */,
+				34462ED51704588EAA0BF713 /* ImportProgressView.swift in Sources */,
+				A784A1D0023A5CC9AEC61419 /* PlexTrack.swift in Sources */,
+				0020FFE4DA815BCEA11A3228 /* PlexPlaylist.swift in Sources */,
+				996FF6E62B0253FEACB3616D /* PlexLibrarySection.swift in Sources */,
+				138686503A425139B71C0CD5 /* MusicTrack.swift in Sources */,
+				73861D5418C35449A076732B /* MusicPlaylist.swift in Sources */,
+				7C8CFCCB77CB5BC7B5284B77 /* MatchResult.swift in Sources */,
+				47B87337D928567E985B7260 /* MusicLibraryService.swift in Sources */,
+				907A0531F21957EE9361C696 /* TrackMatchingService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		/* End PBXSourcesBuildPhase section */
+
+		/* Begin XCBuildConfiguration section */
+		A27CEFEDA04D56D6B4801E97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FFA92C19DA58572EAA9B9259 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf-with-dsym;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				ENABLE_NS_ASSERTIONS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		191F672C94155DF0B202BD28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				CODE_SIGN_ENTITLEMENTS = Sources/PlaylistImporter/PlaylistImporter.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Sources/PlaylistImporter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
+				PRODUCT_BUNDLE_IDENTIFIER = com.playlistimporter.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		41A4D95B210B55B086282FF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf-with-dsym;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				ENABLE_NS_ASSERTIONS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				CODE_SIGN_ENTITLEMENTS = Sources/PlaylistImporter/PlaylistImporter.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Sources/PlaylistImporter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
+				PRODUCT_BUNDLE_IDENTIFIER = com.playlistimporter.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		/* End XCBuildConfiguration section */
+
+		/* Begin XCConfigurationList section */
+		CA6A12C1D56C571D82ECB417 /* Build configuration list for PBXProject */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (A27CEFEDA04D56D6B4801E97, FFA92C19DA58572EAA9B9259);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3147AF6185065BCEBD20E6DD /* Build configuration list for PBXNativeTarget */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (191F672C94155DF0B202BD28, 41A4D95B210B55B086282FF1);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		/* End XCConfigurationList section */
+
+	};
+	rootObject = 008DCACC2DC65BEF8BB7A1F1 /* Project object */;
+}
