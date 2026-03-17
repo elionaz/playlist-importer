@@ -7,6 +7,7 @@
 	objects = {
 
 		/* Begin PBXBuildFile section */
+		AA001122334455667788AABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA001122334455667788AA00 /* Assets.xcassets */; };
 		CA469587DB31537A84368C76 /* PlaylistImporterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112BB6008D245698BEFDCA54 /* PlaylistImporterApp.swift */; };
 		C1BE5A0FB8A3540FA9555145 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D96816509544C9CEB9703 /* KeychainHelper.swift */; };
 		0C695802A37A5AC4AF492751 /* StringSimilarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9C1FF026856C9AFA791BC /* StringSimilarity.swift */; };
@@ -33,6 +34,7 @@
 
 		/* Begin PBXFileReference section */
 		34C6E33C92F956BA83173DE5 /* PlaylistImporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaylistImporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA001122334455667788AA00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Assets.xcassets; sourceTree = "<absolute>"; };
 		0F9A575FFD1754D789609049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		233E2345949851F987B69789 /* PlaylistImporter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlaylistImporter.entitlements; sourceTree = "<group>"; };
 		112BB6008D245698BEFDCA54 /* PlaylistImporterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistImporterApp.swift; path = /Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/PlaylistImporterApp.swift; sourceTree = "<absolute>"; };
@@ -130,6 +132,7 @@ C4DD3DEFDC2D5BAC98A4C6B5 /* Helpers */ = {
 	isa = PBXGroup;
 	children = (
 		112BB6008D245698BEFDCA54,
+		AA001122334455667788AA00,
 		C4DD3DEFDC2D5BAC98A4C6B5,
 		707FFD3BF31C5B55B0F90437,
 		03379ABA64BE579A9FBD269A,
@@ -215,6 +218,7 @@ C4DD3DEFDC2D5BAC98A4C6B5 /* Helpers */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA001122334455667788AABB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +300,7 @@ C4DD3DEFDC2D5BAC98A4C6B5 /* Helpers */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
 				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -313,10 +318,11 @@ C4DD3DEFDC2D5BAC98A4C6B5 /* Helpers */ = {
 				CODE_SIGN_ENTITLEMENTS = Sources/PlaylistImporter/PlaylistImporter.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DEPTSNFP99;
 				INFOPLIST_FILE = Sources/PlaylistImporter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
 				PRODUCT_BUNDLE_IDENTIFIER = com.playlistimporter.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Music2PLX;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 6.0;
@@ -327,6 +333,7 @@ C4DD3DEFDC2D5BAC98A4C6B5 /* Helpers */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
 				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -339,12 +346,15 @@ C4DD3DEFDC2D5BAC98A4C6B5 /* Helpers */ = {
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/PlaylistImporter/PlaylistImporter.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DEPTSNFP99;
 				INFOPLIST_FILE = Sources/PlaylistImporter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
 				PRODUCT_BUNDLE_IDENTIFIER = com.playlistimporter.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Music2PLX;
+				PROVISIONING_PROFILE_SPECIFIER = "Mac App Store Distribution";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 6.0;

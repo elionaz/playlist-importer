@@ -1,0 +1,216 @@
+{
+  "source": "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/ImportProgressView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Import",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 19
+        }
+      },
+      {
+        "comment": "",
+        "key": "New Import",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 24
+        }
+      },
+      {
+        "comment": "",
+        "key": "Settings",
+        "location": {
+          "startingColumn": 19,
+          "startingLine": 70
+        }
+      },
+      {
+        "comment": "",
+        "key": "If playlist already exists:",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 75
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 78
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select playlists to import",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 94
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld playlist%@ · %lld tracks",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 98
+        }
+      },
+      {
+        "comment": "",
+        "key": "Open each selected playlist to load its tracks first",
+        "location": {
+          "startingColumn": 72,
+          "startingLine": 111
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 129,
+          "startingLine": 111
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Import",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 106
+        }
+      },
+      {
+        "comment": "",
+        "key": "Progress",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 121
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 126
+        }
+      },
+      {
+        "comment": "",
+        "key": "Loading Plex library (%lld%%)",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 164
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld/%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 157
+        }
+      },
+      {
+        "comment": "",
+        "key": "Retry",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 181
+        }
+      },
+      {
+        "comment": "",
+        "key": "Results",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 216
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export CSV",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 224
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 268
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 311
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 314
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 318
+        }
+      },
+      {
+        "comment": "",
+        "key": "Review",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 334
+        }
+      },
+      {
+        "comment": "",
+        "key": "Open in Plex",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 346
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 428
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 436
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld of %lld tracks",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 423
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,16 @@
+{
+  "source": "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/PlaylistImporterApp.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "About Playlist Importer",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 33
+        }
+      }
+    ]
+  },
+  "version": 1
+}

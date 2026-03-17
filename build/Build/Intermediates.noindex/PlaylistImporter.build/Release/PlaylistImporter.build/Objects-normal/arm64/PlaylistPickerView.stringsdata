@@ -1,0 +1,40 @@
+{
+  "source": "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/PlaylistPickerView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "%lld tracks",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 24
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld selected",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "Deselect All",
+        "location": {
+          "startingColumn": 69,
+          "startingLine": 41
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select All",
+        "location": {
+          "startingColumn": 86,
+          "startingLine": 41
+        }
+      }
+    ]
+  },
+  "version": 1
+}
