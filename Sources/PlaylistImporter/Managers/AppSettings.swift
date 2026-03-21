@@ -25,6 +25,12 @@ import Observation
 
     var isAuthenticated: Bool { !plexToken.isEmpty }
 
+    // MARK: - Sound
+
+    var soundEnabled: Bool {
+        didSet { UserDefaults.standard.set(soundEnabled, forKey: "soundEnabled") }
+    }
+
     // MARK: - Path Mapping
 
     var localPathPrefix: String {
@@ -41,6 +47,7 @@ import Observation
         self.plexServerURL         = UserDefaults.standard.string(forKey: "plexServerURL") ?? ""
         self.plexLibrarySectionID  = UserDefaults.standard.string(forKey: "plexLibrarySectionID") ?? ""
         self.plexMachineIdentifier = UserDefaults.standard.string(forKey: "plexMachineIdentifier") ?? ""
+        self.soundEnabled          = UserDefaults.standard.object(forKey: "soundEnabled") as? Bool ?? true
         self.localPathPrefix       = UserDefaults.standard.string(forKey: "localPathPrefix") ?? "/Volumes/music"
         self.plexPathPrefix        = UserDefaults.standard.string(forKey: "plexPathPrefix") ?? ""
         // Migrar token viejo desde Keychain si existe

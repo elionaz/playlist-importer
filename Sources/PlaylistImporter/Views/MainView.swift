@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 struct MainView: View {
     @Environment(AppSettings.self)         private var settings
@@ -36,6 +37,9 @@ struct MainView: View {
             .navigationSplitViewColumnWidth(min: 220, ideal: 250, max: 320)
         }
         .toolbar { toolbarItems }
+        .onChange(of: importManager.step) { _, newStep in
+            if newStep == .done { playSound("Glass") }
+        }
         .sheet(isPresented: $showSetup) {
             PlexServerSetupView(isSheet: true) { showSetup = false }
                 .environment(settings)
@@ -214,6 +218,7 @@ struct MainView: View {
             }
             loadedPlaylists[name] = playlist
             trackLoadProgress.removeValue(forKey: name)
+            playSound("Tink")
         } catch is CancellationError {
             // Tarea cancelada (usuario seleccionó otra playlist) — no hacer nada
             trackLoadProgress.removeValue(forKey: name)
@@ -221,6 +226,13 @@ struct MainView: View {
             trackLoadProgress.removeValue(forKey: name)
             trackLoadErrors[name] = error.localizedDescription
         }
+    }
+
+    // MARK: - Sound
+
+    private func playSound(_ name: String) {
+        guard settings.soundEnabled else { return }
+        NSSound(named: name)?.play()
     }
 
     // MARK: - Import

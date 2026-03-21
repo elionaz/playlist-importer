@@ -21,6 +21,7 @@ A macOS app that imports playlists from Apple Music (iTunes) into Plex, using a 
 
 - macOS 14 (Sonoma) or later
 - Xcode 16+
+- An Apple ID added to Xcode (free — required for code signing)
 - Music.app with at least one playlist
 - A running Plex Media Server with a Music library
 
@@ -43,11 +44,14 @@ Or open it directly from Finder.
 
 ### 3. Configure signing
 
-In Xcode, select the **PlaylistImporter** target → **Signing & Capabilities** → set your Team and Bundle Identifier.
+1. In Xcode → **Settings → Accounts**, add your Apple ID (free account is sufficient).
+2. Select the **PlaylistImporter** target → **Signing & Capabilities** → enable **Automatically manage signing** → select your personal team.
+
+> **Why is signing required?** macOS uses the app's Team ID to identify it in the TCC (privacy permissions) system. Apps without a valid Team ID (ad-hoc signed) are silently blocked from requesting Automation permission — no dialog appears and Apple Events fail with error -600. This affects macOS 15+ and is particularly strict on macOS 26 (Tahoe).
 
 ### 4. Run
 
-Press **⌘R**. The first time you load a playlist, macOS will ask for permission to control Music.app — click **Allow**.
+Press **⌘R**. Make sure Music.app is open before launching. The first time you load a playlist, macOS will ask for permission to control Music.app — click **Allow**.
 
 ---
 
@@ -75,6 +79,20 @@ Press **⌘R**. The first time you load a playlist, macOS will ask for permissio
 | ? | Ambiguous — multiple candidates found |
 | ✗ | No match found in Plex library |
 | — | Streaming-only track (no local file) |
+
+## Troubleshooting
+
+### "Music app is not running" / playlists don't load
+
+1. **Make sure Music.app is open** before launching PlaylistImporter.
+2. **Check System Settings → Privacy & Security → Automation** — PlaylistImporter should appear with Music toggled on. If it's missing, the app wasn't signed correctly (see signing steps above).
+3. If PlaylistImporter appears but is toggled off, enable it and click **Retry** in the app.
+
+### No permission dialog appears (macOS 26 / Tahoe)
+
+macOS 26 beta has a known issue where the Automation permission dialog does not appear for apps without a valid Team ID (ad-hoc signed builds). Ensure you've signed with your Apple ID as described in the installation steps. The app also requires `app-sandbox` to be **disabled** in its entitlements — do not enable the sandbox, as it triggers an additional macOS 26 beta bug (`/private/var/db/DetachedSignatures` not found) that prevents AppleScript from running.
+
+---
 
 ## Running tests
 

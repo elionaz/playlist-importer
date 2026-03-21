@@ -3,6 +3,7 @@ import UniformTypeIdentifiers
 
 struct ImportProgressView: View {
     @Environment(ImportManager.self) private var importManager
+    @Environment(AppSettings.self)   private var settings
 
     @Binding var selectedNames: Set<String>
     @Binding var duplicateAction: DuplicateAction
@@ -83,6 +84,13 @@ struct ImportProgressView: View {
                 .pickerStyle(.menu)
                 .labelsHidden()
             }
+
+            Toggle(isOn: Binding(get: { settings.soundEnabled }, set: { settings.soundEnabled = $0 })) {
+                Label("Sound notifications", systemImage: settings.soundEnabled ? "speaker.wave.2" : "speaker.slash")
+                    .font(.caption)
+            }
+            .toggleStyle(.switch)
+            .controlSize(.mini)
 
             Divider()
 

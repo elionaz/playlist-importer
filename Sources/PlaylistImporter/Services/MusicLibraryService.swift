@@ -29,6 +29,27 @@ enum MusicLibraryError: LocalizedError {
 
     private let batchSize = 500
 
+    // No longer needed — kept so existing call sites compile
+    func requestAutomationPermissionIfNeeded() {}
+
+    // MARK: - Ensure Music is running
+
+    private func ensureMusicRunning() async throws {
+        if !NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.Music").isEmpty {
+            return
+        }
+        let musicURL = URL(fileURLWithPath: "/System/Applications/Music.app")
+        NSWorkspace.shared.open(musicURL)
+        for _ in 0..<20 {
+            try await Task.sleep(for: .milliseconds(500))
+            if !NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.Music").isEmpty {
+                try await Task.sleep(for: .seconds(3)) // wait for library to load
+                return
+            }
+        }
+        throw MusicLibraryError.musicAppNotRunning
+    }
+
     // MARK: - Playlist Names
 
     func fetchPlaylistNames() async throws -> [String] {
@@ -36,8 +57,10 @@ enum MusicLibraryError: LocalizedError {
         loadError = nil
         defer { isLoading = false }
 
+        try await ensureMusicRunning()
+
         let script = """
-        tell application "Music"
+        tell application id "com.apple.Music"
             set output to ""
             repeat with p in (every user playlist)
                 set output to output & (name of p) & "\n"
@@ -56,12 +79,10 @@ enum MusicLibraryError: LocalizedError {
 
     // MARK: - Track Count
 
-    /// Devuelve el número de tracks de la playlist sin cargar su metadata.
     func fetchTrackCount(for playlistName: String) async throws -> Int {
         let escaped = playlistName.replacingOccurrences(of: "\"", with: "\\\"")
-        // Coercionamos a string dentro del script para que stringValue no devuelva nil
         let script = """
-        tell application "Music"
+        tell application id "com.apple.Music"
             return (count of tracks of user playlist "\(escaped)") as string
         end tell
         """
@@ -71,8 +92,6 @@ enum MusicLibraryError: LocalizedError {
 
     // MARK: - Fetch Playlist with Progress
 
-    /// Carga una playlist en batches de \(batchSize) tracks.
-    /// `onProgress` recibe (tracksLoaded, totalTracks) — se llama en MainActor.
     func fetchPlaylist(
         named name: String,
         onProgress: (@MainActor (Int, Int) -> Void)? = nil
@@ -96,7 +115,6 @@ enum MusicLibraryError: LocalizedError {
         return MusicPlaylist(id: name, name: name, tracks: allTracks)
     }
 
-    /// Carga varias playlists con progreso.
     func fetchPlaylists(
         named names: [String],
         onProgress: (@MainActor (Int, Int) -> Void)? = nil
@@ -116,7 +134,7 @@ enum MusicLibraryError: LocalizedError {
     private func fetchTrackBatch(playlistName: String, from: Int, to: Int) async throws -> [MusicTrack] {
         let escaped = playlistName.replacingOccurrences(of: "\"", with: "\\\"")
         let script = """
-        tell application "Music"
+        tell application id "com.apple.Music"
             set output to ""
             set p to user playlist "\(escaped)"
             set allTracks to every track of p
@@ -161,41 +179,30 @@ enum MusicLibraryError: LocalizedError {
     // MARK: - AppleScript Runner
 
     private func runAppleScript(_ source: String) async throws -> String {
-        try await Task.detached(priority: .userInitiated) {
-            var errorDict: NSDictionary?
-            let script = NSAppleScript(source: source)
-            guard let descriptor = script?.executeAndReturnError(&errorDict) else {
-                if let err = errorDict {
-                    let errNum = err[NSAppleScript.errorNumber] as? Int
-                    // -600 = procNotFound. Si Music está corriendo, es falta de permiso de Automatización.
-                    // Si no está corriendo, es que realmente no está abierta.
-                    if errNum == -600 {
-                        let musicRunning = !NSRunningApplication
-                            .runningApplications(withBundleIdentifier: "com.apple.Music")
-                            .isEmpty
-                        if musicRunning {
-                            throw MusicLibraryError.permissionDenied
+        try await withCheckedThrowingContinuation { continuation in
+            DispatchQueue.global(qos: .userInitiated).async {
+                var errorDict: NSDictionary?
+                let script = NSAppleScript(source: source)
+                guard let descriptor = script?.executeAndReturnError(&errorDict) else {
+                    let errNum = errorDict?[NSAppleScript.errorNumber] as? Int
+                    let msg    = errorDict?[NSAppleScript.errorMessage] as? String
+                    print("[MusicLibraryService] NSAppleScript error \(errNum ?? 0): \(msg ?? "nil")")
+                    switch errNum {
+                    case -600:  continuation.resume(throwing: MusicLibraryError.musicAppNotRunning)
+                    case -1743: continuation.resume(throwing: MusicLibraryError.permissionDenied)
+                    default:
+                        let lower = (msg ?? "").lowercased()
+                        if lower.contains("not authorized") || lower.contains("access") {
+                            continuation.resume(throwing: MusicLibraryError.permissionDenied)
                         } else {
-                            throw MusicLibraryError.musicAppNotRunning
+                            continuation.resume(throwing: MusicLibraryError.scriptError(msg ?? "Error \(errNum ?? -1)"))
                         }
                     }
-                    // -1743 = not authorized to send Apple Events
-                    if errNum == -1743 {
-                        throw MusicLibraryError.permissionDenied
-                    }
-                    let msg = (err[NSAppleScript.errorMessage] as? String)
-                           ?? errNum.map { "Error \($0)" }
-                           ?? "Unknown AppleScript error"
-                    let lower = msg.lowercased()
-                    if lower.contains("not authorized") || lower.contains("access") {
-                        throw MusicLibraryError.permissionDenied
-                    }
-                    throw MusicLibraryError.scriptError(msg)
+                    return
                 }
-                throw MusicLibraryError.scriptError("Script returned no result")
+                continuation.resume(returning: descriptor.stringValue ?? "")
             }
-            return descriptor.stringValue ?? ""
-        }.value
+        }
     }
 
     // MARK: - Parser
