@@ -1,117 +1,105 @@
-# PlaylistImporter
+# Music2PLX
 
-A macOS app that imports playlists from Apple Music (iTunes) into Plex, using a two-level track matching strategy: exact file path matching first, then fuzzy metadata matching.
+Import your iTunes and Apple Music playlists into Plex Media Server — automatically matched and ready in Plexamp.
 
 ![macOS](https://img.shields.io/badge/macOS-14%2B-blue) ![Swift](https://img.shields.io/badge/Swift-6.0-orange)
 
+---
+
+## What it does
+
+Music2PLX reads your playlists from Apple Music and finds each track in your Plex library using a two-level matching strategy: exact file path first, then smart fuzzy matching by title, artist, album, and duration. Matched tracks are assembled into a new playlist in Plex — no manual work, no CSV files.
+
 ## Features
 
-- Reads playlists directly from Music.app via AppleScript
-- Authenticates with Plex via OAuth (no manual token copying)
+- Reads playlists directly from Apple Music (no export needed)
+- Plex OAuth sign-in — no manual token copying
 - Two-level track matching:
   - **L1** — exact file path match (fast, 100% confidence)
-  - **L2** — fuzzy metadata match using weighted similarity (title, artist, album, duration, year)
+  - **L2** — fuzzy metadata match (title, artist, album, duration, year)
+- Preview match results before importing
 - Handles duplicates: skip, replace, append, or auto-rename
-- Path prefix mapping for libraries mounted at different paths
-- Live progress tracking with per-playlist and per-track status
+- Path prefix mapping for libraries at a different path on the server
+- Works alongside active VPN connections (Cloudflare Warp, etc.)
+- Sound notifications when loading and importing finish (optional)
 - CSV export of the full import log
-- 70 unit tests covering core matching logic
 
 ## Requirements
 
 - macOS 14 (Sonoma) or later
-- Xcode 16+
-- An Apple ID added to Xcode (free — required for code signing)
-- Music.app with at least one playlist
-- A running Plex Media Server with a Music library
-
-## Installation
-
-### 1. Clone the repository
-
-```bash
-git clone git@github.com:elionaz/playlist-importer.git
-cd playlist-importer
-```
-
-### 2. Open in Xcode
-
-```bash
-open PlaylistImporter.xcodeproj
-```
-
-Or open it directly from Finder.
-
-### 3. Configure signing
-
-1. In Xcode → **Settings → Accounts**, add your Apple ID (free account is sufficient).
-2. Select the **PlaylistImporter** target → **Signing & Capabilities** → enable **Automatically manage signing** → select your personal team.
-
-> **Why is signing required?** macOS uses the app's Team ID to identify it in the TCC (privacy permissions) system. Apps without a valid Team ID (ad-hoc signed) are silently blocked from requesting Automation permission — no dialog appears and Apple Events fail with error -600. This affects macOS 15+ and is particularly strict on macOS 26 (Tahoe).
-
-### 4. Run
-
-Press **⌘R**. Make sure Music.app is open before launching. The first time you load a playlist, macOS will ask for permission to control Music.app — click **Allow**.
+- Apple Music / iTunes library on the same Mac
+- Plex Media Server with a Music library on your local network
 
 ---
 
-## First-time setup
+## Setup
 
-1. Click the **gear icon** (top right) to open Plex settings.
-2. Enter your Plex server URL (e.g. `http://192.168.1.10:32400`).
-3. Click **Sign in with Plex** — your browser will open for authentication.
-4. Select your Music library from the dropdown.
-5. **(Optional)** If your local music folder path differs from the path Plex sees on the server, configure the path prefix mapping. This improves matching accuracy significantly.
+### 1. Connect to Plex
+
+1. Open Music2PLX and click the **gear icon** (top right).
+2. Enter your Plex server URL — e.g. `http://192.168.1.10:32400`.
+3. Click **Sign in with Plex**. Your browser will open for authentication.
+4. Back in the app, click **Detect Music Libraries** and select your music library.
+
+### 2. Path mapping (optional but recommended)
+
+If your music files are stored at a different path on the Plex server than on your Mac, configure the path prefix mapping in Settings:
+
+- **iTunes / Mac prefix** — the path as your Mac sees it, e.g. `/Volumes/Music`
+- **Plex server prefix** — the path as the Plex server sees it, e.g. `/data/music`
+
+Use **Show sample Plex file path** to see exactly how Plex stores the path, then compare it to the file location in Finder.
+
+---
 
 ## Usage
 
-1. Select one or more playlists from the sidebar.
-2. Click a playlist to preview its tracks and match status.
-3. Choose what to do if the playlist already exists in Plex (Skip / Replace / Append / Rename).
+1. **Select a playlist** from the sidebar on the left.
+2. **Review the tracks** — each one shows its match status before you import.
+3. **Choose duplicate handling** — what to do if the playlist already exists in Plex.
 4. Click **Start Import**.
-5. When done, use **Export CSV** to save the full import log.
+5. When finished, use **Export CSV** to save the full import log.
 
-## Track matching
+### Match status icons
 
 | Icon | Meaning |
 |------|---------|
 | ✓ | Matched with high confidence |
+| ~ | Fuzzy match — close but not exact |
 | ? | Ambiguous — multiple candidates found |
 | ✗ | No match found in Plex library |
 | — | Streaming-only track (no local file) |
 
-## Troubleshooting
-
-### "Music app is not running" / playlists don't load
-
-1. **Make sure Music.app is open** before launching PlaylistImporter.
-2. **Check System Settings → Privacy & Security → Automation** — PlaylistImporter should appear with Music toggled on. If it's missing, the app wasn't signed correctly (see signing steps above).
-3. If PlaylistImporter appears but is toggled off, enable it and click **Retry** in the app.
-
-### No permission dialog appears (macOS 26 / Tahoe)
-
-macOS 26 beta has a known issue where the Automation permission dialog does not appear for apps without a valid Team ID (ad-hoc signed builds). Ensure you've signed with your Apple ID as described in the installation steps. The app also requires `app-sandbox` to be **disabled** in its entitlements — do not enable the sandbox, as it triggers an additional macOS 26 beta bug (`/private/var/db/DetachedSignatures` not found) that prevents AppleScript from running.
-
 ---
 
-## Running tests
+## Troubleshooting
 
-```bash
-swift test
-```
+### Playlists don't load / Apple Music error
+
+- Make sure **Music.app is open** before loading playlists.
+- Check **System Settings → Privacy & Security → Media & Apple Music** — Music2PLX should be listed and enabled.
+
+### Can't connect to Plex / "Detecting libraries" hangs
+
+- Confirm your Plex server URL includes the port: `http://192.168.1.10:32400`.
+- Check **System Settings → Privacy & Security → Local Network** — Music2PLX must be toggled on.
+- If you are using a VPN (Cloudflare Warp, etc.), Music2PLX routes around it automatically using your physical network interface. No action needed.
+
+### Tracks not matching
+
+- Configure path prefix mapping in Settings (see Setup step 2 above).
+- Use **Show sample Plex file path** to see the exact path format Plex uses.
+- Tracks available only via Apple Music streaming (no local file) cannot be matched.
+
+---
 
 ## Project structure
 
 ```
 Sources/PlaylistImporter/
-├── Helpers/          # StringSimilarity, DurationCompare, KeychainHelper
+├── Helpers/          # StringSimilarity, DurationCompare, LocalNetworkPermission
 ├── Managers/         # AppSettings, ImportManager
 ├── Models/           # MusicTrack, PlexTrack, MatchResult, …
-├── Services/         # MusicLibraryService, PlexAPIService, PlexAuthService, TrackMatchingService
+├── Services/         # MusicLibraryService, PlexAPIService, PlexAuthService, PlexHTTPClient, TrackMatchingService
 └── Views/            # SwiftUI views
-
-Tests/PlaylistImporterTests/
-├── StringSimilarityTests.swift
-├── DurationCompareTests.swift
-└── TrackMatchingTests.swift
 ```

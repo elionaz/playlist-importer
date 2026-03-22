@@ -56,6 +56,7 @@ struct PlexServerSetupView: View {
         Section {
             TextField("http://192.168.1.100:32400", text: $serverURLInput)
                 .textFieldStyle(.plain)
+                .foregroundStyle(.primary)
                 .onSubmit { saveServerURL() }
                 .onChange(of: serverURLInput) { saveServerURL() }
         } header: {
@@ -102,7 +103,6 @@ struct PlexServerSetupView: View {
                     } label: {
                         Label("Sign in with Plex", systemImage: "person.badge.key")
                     }
-                    .disabled(serverURLInput.isEmpty)
 
                     if let error = authService.authError {
                         Label(error, systemImage: "exclamationmark.triangle.fill")
@@ -159,7 +159,6 @@ struct PlexServerSetupView: View {
                 onDismiss?()
             }
             .keyboardShortcut(.defaultAction)
-            .disabled(!settings.isAuthenticated)
         }
         .padding(20)
     }
@@ -197,9 +196,19 @@ struct PlexServerSetupView: View {
             }
 
             if let error = sectionFetchError {
-                Label(error, systemImage: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.red)
-                    .font(.caption)
+                VStack(alignment: .leading, spacing: 6) {
+                    Label(error, systemImage: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.red)
+                        .font(.caption)
+                    if error.contains("Local network") {
+                        Button("Open Privacy Settings…") {
+                            NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocalNetwork")!)
+                        }
+                        .font(.caption)
+                        .buttonStyle(.plain)
+                        .foregroundStyle(Color.accentColor)
+                    }
+                }
             }
         } header: {
             Text("Music Library")
@@ -254,6 +263,7 @@ struct PlexServerSetupView: View {
     private func fetchSections() async {
         isFetchingSections = true
         sectionFetchError = nil
+        await plexAPI.ensureLocalNetworkPermission()
         do {
             let all = try await plexAPI.fetchLibrarySections()
             musicSections = all.filter { $0.isMusic }

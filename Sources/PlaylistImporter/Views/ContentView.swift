@@ -9,7 +9,7 @@ struct ContentView: View {
             if settings.isAuthenticated {
                 MainView()
             } else {
-                welcomeView
+                OnboardingView { showSetup = true }
             }
         }
         .sheet(isPresented: $showSetup) {
@@ -17,39 +17,6 @@ struct ContentView: View {
                 .environment(settings)
                 .frame(width: 500)
         }
-        .onAppear {
-            if !settings.isAuthenticated { showSetup = true }
-        }
-    }
-
-    // MARK: - Welcome
-
-    private var welcomeView: some View {
-        VStack(spacing: 24) {
-            Image(systemName: "music.note.list")
-                .font(.system(size: 64))
-                .foregroundStyle(.purple)
-
-            VStack(spacing: 8) {
-                Text("Playlist Importer")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                Text("Transfer your iTunes playlists to Plex")
-                    .foregroundStyle(.secondary)
-            }
-
-            Button {
-                showSetup = true
-            } label: {
-                Label("Connect to Plex", systemImage: "person.badge.key")
-                    .font(.headline)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 10)
-            }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

@@ -13,6 +13,7 @@ struct MainView: View {
     @State private var inspectedName: String? = nil
     @State private var duplicateAction: DuplicateAction = .skip
     @State private var showSetup = false
+    @State private var showOnboarding = false
     @State private var loadError: String? = nil
 
     // Progreso de carga por playlist: name → (loaded, total)
@@ -39,6 +40,10 @@ struct MainView: View {
         .toolbar { toolbarItems }
         .onChange(of: importManager.step) { _, newStep in
             if newStep == .done { playSound("Glass") }
+        }
+        .sheet(isPresented: $showOnboarding) {
+            OnboardingView(onGetStarted: { showOnboarding = false }, ctaLabel: "Close")
+                .frame(width: 960, height: 620)
         }
         .sheet(isPresented: $showSetup) {
             PlexServerSetupView(isSheet: true) { showSetup = false }
@@ -194,6 +199,12 @@ struct MainView: View {
                 Image(systemName: "gear")
             }
             .help("Plex Settings")
+        }
+        ToolbarItem(placement: .primaryAction) {
+            Button { showOnboarding = true } label: {
+                Image(systemName: "questionmark.circle")
+            }
+            .help("Getting Started")
         }
     }
 

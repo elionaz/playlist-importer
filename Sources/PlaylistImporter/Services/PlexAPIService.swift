@@ -5,6 +5,7 @@ import Foundation
 enum PlexAPIError: LocalizedError {
     case notConfigured
     case networkError(Error)
+    case localNetworkBlocked
     case httpError(Int)
     case decodingError(Error)
     case noMusicLibrary
@@ -13,6 +14,7 @@ enum PlexAPIError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notConfigured:         return "Plex server URL or token is not configured."
+        case .localNetworkBlocked:   return "Local network access is blocked. Go to System Settings → Privacy & Security → Local Network and enable Music2PLX."
         case .networkError(let e):   return "Network error: \(e.localizedDescription)"
         case .httpError(let code):   return "HTTP error \(code)"
         case .decodingError(let e):  return "Response parsing error: \(e.localizedDescription)"
@@ -30,9 +32,21 @@ enum PlexAPIError: LocalizedError {
     private let settings: AppSettings
     private let pageSize = 500
     private let decoder = JSONDecoder()
+    private var localNetworkPermissionRequested = false
+    private let http = PlexHTTPClient()
 
     init(settings: AppSettings) {
         self.settings = settings
+    }
+
+    /// Call once before any API request to ensure the Local Network TCC dialog has been shown.
+    func ensureLocalNetworkPermission() async {
+        guard !localNetworkPermissionRequested else { return }
+        localNetworkPermissionRequested = true
+        let base = settings.plexServerURL.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        guard let url = URL(string: base), let host = url.host else { return }
+        let port = UInt16(url.port ?? 32400)
+        await LocalNetworkPermission.requestIfNeeded(host: host, port: port)
     }
 
     // MARK: - Identity
@@ -192,13 +206,13 @@ enum PlexAPIError: LocalizedError {
 
     private func put(path: String, params: [String: String] = [:]) async throws {
         let request = try buildRequest(method: "PUT", path: path, params: params)
-        let (_, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await http.data(for: request)
         try validateHTTP(response)
     }
 
     private func delete(path: String) async throws {
         let request = try buildRequest(method: "DELETE", path: path, params: [:])
-        let (_, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await http.data(for: request)
         try validateHTTP(response)
     }
 
@@ -206,7 +220,7 @@ enum PlexAPIError: LocalizedError {
         let data: Data
         let response: URLResponse
         do {
-            (data, response) = try await URLSession.shared.data(for: request)
+            (data, response) = try await http.data(for: request)
         } catch {
             throw PlexAPIError.networkError(error)
         }

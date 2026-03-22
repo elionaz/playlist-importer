@@ -22,8 +22,8 @@
 	<string>public.app-category.music</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
-	<key>NSAppleEventsUsageDescription</key>
-	<string>Music2PLX necesita acceder a Music.app para leer tus playlists.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Music2PLX necesita acceder a tu biblioteca de Music para leer tus playlists.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Music2PLX necesita acceder a tu Plex Media Server en la red local.</string>
 	<key>NSPrincipalClass</key>
