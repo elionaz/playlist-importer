@@ -1,3 +1,6 @@
+> [!NOTE]
+> **Historical note.** The freemium / StoreKit / Mac App Store plan described in section 3 was dropped on 2026-11-14 ([#1](https://github.com/elionaz/playlist-importer/pull/1)). The app is now free and unlimited, and none of `EntitlementManager`, `PaywallView` or `Configuration.storekit` exist anymore. The performance and macOS 26 notes (sections 1–2) still apply.
+
 # Session 2026-05-11 — Performance fix, macOS 26 bug, Freemium + MAS prep
 
 Resumen ejecutivo de los cambios hechos en esta sesión.
