@@ -28,9 +28,7 @@ struct ContentView: View {
         .environment({
             let s = AppSettings()
             let a = PlexAPIService(settings: s)
-            let e = EntitlementManager()
-            return ImportManager(settings: s, plexAPI: a, entitlement: e)
+            return ImportManager(settings: s, plexAPI: a)
         }())
-        .environment(EntitlementManager())
         .frame(width: 960, height: 620)
 }
