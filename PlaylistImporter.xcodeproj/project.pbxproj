@@ -29,8 +29,6 @@
 		C1BE5A0FB8A3540FA9555145 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D96816509544C9CEB9703 /* KeychainHelper.swift */; };
 		C23BB6A354335647A4FCD863 /* ImportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439DCFBBDC756E0AE35D044 /* ImportManager.swift */; };
 		CA469587DB31537A84368C76 /* PlaylistImporterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112BB6008D245698BEFDCA54 /* PlaylistImporterApp.swift */; };
-		D4422C6F2FB2915600432AC9 /* EntitlementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4422C6E2FB2915600432AC9 /* EntitlementManager.swift */; };
-		D4422C712FB2916F00432AC9 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4422C702FB2916F00432AC9 /* PaywallView.swift */; };
 		E1A2B3C4D5E6F7A8B9C0D1E3 /* LocalNetworkPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A2B3C4E5F6A7B8C9D0E1F3 /* LocalNetworkPermission.swift */; };
 		EFE67A56E0C153ADAF5FBBBD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D185D39695521691331FCB /* MainView.swift */; };
 		F1A2B3C4D5E6F7A8B9C0D1E2 /* iTunesLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2 /* iTunesLibrary.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -62,9 +60,6 @@
 		B1C2D3E4F5A6B7C8D9E0F1A2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = "Sources/PlaylistImporter/Views/OnboardingView.swift"; sourceTree = SOURCE_ROOT; };
 		C2A3B4C5D6E7F8A9B0C1D2E4 /* PlexHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexHTTPClient.swift; path = "Sources/PlaylistImporter/Services/PlexHTTPClient.swift"; sourceTree = SOURCE_ROOT; };
 		D1A2B3C4E5F6A7B8C9D0E1F3 /* LocalNetworkPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocalNetworkPermission.swift; path = "Sources/PlaylistImporter/Helpers/LocalNetworkPermission.swift"; sourceTree = SOURCE_ROOT; };
-		D4422C6E2FB2915600432AC9 /* EntitlementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntitlementManager.swift; path = Sources/PlaylistImporter/Managers/EntitlementManager.swift; sourceTree = SOURCE_ROOT; };
-		D4422C702FB2916F00432AC9 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaywallView.swift; path = Sources/PlaylistImporter/Views/PaywallView.swift; sourceTree = SOURCE_ROOT; };
-		D4422C722FB291E300432AC9 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		D7D5FA3C32D55E26BF5F7C8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = "Sources/PlaylistImporter/Views/ContentView.swift"; sourceTree = SOURCE_ROOT; };
 		DB5D96816509544C9CEB9703 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = "Sources/PlaylistImporter/Helpers/KeychainHelper.swift"; sourceTree = SOURCE_ROOT; };
 		E5E0C6C543925799A629191E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppSettings.swift; path = "Sources/PlaylistImporter/Managers/AppSettings.swift"; sourceTree = SOURCE_ROOT; };
@@ -138,7 +133,6 @@
 		707FFD3BF31C5B55B0F90437 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				D4422C6E2FB2915600432AC9 /* EntitlementManager.swift */,
 				E5E0C6C543925799A629191E /* AppSettings.swift */,
 				8439DCFBBDC756E0AE35D044 /* ImportManager.swift */,
 			);
@@ -148,7 +142,6 @@
 		754D0949D96F545493ADFF8A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D4422C702FB2916F00432AC9 /* PaywallView.swift */,
 				D7D5FA3C32D55E26BF5F7C8F /* ContentView.swift */,
 				B1C2D3E4F5A6B7C8D9E0F1A2 /* OnboardingView.swift */,
 				16D185D39695521691331FCB /* MainView.swift */,
@@ -163,7 +156,6 @@
 		871BAB2F288E55F9BDDF08FF = {
 			isa = PBXGroup;
 			children = (
-				D4422C722FB291E300432AC9 /* Configuration.storekit */,
 				43180F2084315839AC3FF2BB /* PlaylistImporter */,
 				7013C57BE10B537FA9AE666A /* Products */,
 				D4422C6D2FB2911600432AC9 /* Recovered References */,
@@ -270,7 +262,6 @@
 				791B3117CF5056DBB7EFDD15 /* PlexAuthService.swift in Sources */,
 				88960FE256195F46BF86D676 /* PlexAPIService.swift in Sources */,
 				F2A3B4C5D6E7F8A9B0C1D2E4 /* PlexHTTPClient.swift in Sources */,
-				D4422C712FB2916F00432AC9 /* PaywallView.swift in Sources */,
 				0C1D945B6B9E5F748D6CEDA8 /* ContentView.swift in Sources */,
 				EFE67A56E0C153ADAF5FBBBD /* MainView.swift in Sources */,
 				074F292C24DA552BAC780329 /* PlexServerSetupView.swift in Sources */,
@@ -282,7 +273,6 @@
 				0020FFE4DA815BCEA11A3228 /* PlexPlaylist.swift in Sources */,
 				996FF6E62B0253FEACB3616D /* PlexLibrarySection.swift in Sources */,
 				138686503A425139B71C0CD5 /* MusicTrack.swift in Sources */,
-				D4422C6F2FB2915600432AC9 /* EntitlementManager.swift in Sources */,
 				73861D5418C35449A076732B /* MusicPlaylist.swift in Sources */,
 				7C8CFCCB77CB5BC7B5284B77 /* MatchResult.swift in Sources */,
 				47B87337D928567E985B7260 /* MusicLibraryService.swift in Sources */,

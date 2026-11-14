@@ -70,15 +70,13 @@ struct ImportLogEntry: Identifiable, Sendable {
 
     private let settings: AppSettings
     private let plexAPI: PlexAPIService
-    private let entitlement: EntitlementManager?
     private var importTask: Task<Void, Never>?
 
     // MARK: - Init
 
-    init(settings: AppSettings, plexAPI: PlexAPIService, entitlement: EntitlementManager? = nil) {
+    init(settings: AppSettings, plexAPI: PlexAPIService) {
         self.settings    = settings
         self.plexAPI     = plexAPI
-        self.entitlement = entitlement
     }
 
     // MARK: - Public API
@@ -264,12 +262,6 @@ struct ImportLogEntry: Identifiable, Sendable {
 
             currentPlaylistIndex = totalPlaylists
             step = .done
-            // Contabilizar uso gratuito solo si el import efectivamente hizo trabajo
-            // (al menos una playlist creada/replaced/appended).
-            let didRealWork = importLog.contains { $0.plexPlaylistID != nil }
-            if didRealWork {
-                entitlement?.recordImportCompleted()
-            }
 
         } catch is CancellationError {
             step = .cancelled
