@@ -70,13 +70,15 @@ struct ImportLogEntry: Identifiable, Sendable {
 
     private let settings: AppSettings
     private let plexAPI: PlexAPIService
+    private let entitlement: EntitlementManager?
     private var importTask: Task<Void, Never>?
 
     // MARK: - Init
 
-    init(settings: AppSettings, plexAPI: PlexAPIService) {
-        self.settings = settings
-        self.plexAPI  = plexAPI
+    init(settings: AppSettings, plexAPI: PlexAPIService, entitlement: EntitlementManager? = nil) {
+        self.settings    = settings
+        self.plexAPI     = plexAPI
+        self.entitlement = entitlement
     }
 
     // MARK: - Public API
@@ -178,12 +180,18 @@ struct ImportLogEntry: Identifiable, Sendable {
                 currentTrackTotal    = playlist.trackCount
                 currentTrackIndex    = 0
 
-                // Matchear tracks
-                var results: [String: MatchResult] = [:]
-                for (ti, track) in playlist.tracks.enumerated() {
-                    currentTrackIndex = ti
-                    results[track.persistentID] = TrackMatchingService.match(track, index: index)
-                }
+                // Matchear tracks en background para no ahogar el MainActor
+                // ni el autorelease pool con regex/strings temporales.
+                let tracks = playlist.tracks
+                let results: [String: MatchResult] = await Task.detached(priority: .userInitiated) { [index] in
+                    TrackMatchingService.matchAll(tracks: tracks, index: index) { progressIdx in
+                        Task { @MainActor [weak self] in
+                            self?.currentTrackIndex = progressIdx
+                        }
+                    }
+                }.value
+                try Task.checkCancellation()
+                currentTrackIndex = playlist.trackCount
                 matchResults[playlist.name] = results
 
                 // Extraer ratingKeys de los matched
@@ -256,6 +264,12 @@ struct ImportLogEntry: Identifiable, Sendable {
 
             currentPlaylistIndex = totalPlaylists
             step = .done
+            // Contabilizar uso gratuito solo si el import efectivamente hizo trabajo
+            // (al menos una playlist creada/replaced/appended).
+            let didRealWork = importLog.contains { $0.plexPlaylistID != nil }
+            if didRealWork {
+                entitlement?.recordImportCompleted()
+            }
 
         } catch is CancellationError {
             step = .cancelled

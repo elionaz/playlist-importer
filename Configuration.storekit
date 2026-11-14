@@ -1,0 +1,29 @@
+{
+  "identifier" : "2A1F4D7B-9E3C-4B8A-A5D1-6F8E2C3B4A95",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : true,
+      "internalID" : "1A2B3C4D-5E6F-7890-ABCD-EF1234567890",
+      "localizations" : [
+        {
+          "description" : "Unlock unlimited playlist imports from Music to Plex.",
+          "displayName" : "Music2PLX Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.playlistimporter.app.pro_unlock",
+      "referenceName" : "Pro Unlock",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

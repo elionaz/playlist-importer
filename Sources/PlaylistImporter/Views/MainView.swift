@@ -6,6 +6,7 @@ struct MainView: View {
     @Environment(MusicLibraryService.self) private var musicLibrary
     @Environment(ImportManager.self)       private var importManager
     @Environment(PlexAPIService.self)      private var plexAPI
+    @Environment(EntitlementManager.self)  private var entitlement
 
     @State private var playlistNames: [String] = []
     @State private var loadedPlaylists: [String: MusicPlaylist] = [:]
@@ -14,6 +15,7 @@ struct MainView: View {
     @State private var duplicateAction: DuplicateAction = .skip
     @State private var showSetup = false
     @State private var showOnboarding = false
+    @State private var showPaywall = false
     @State private var loadError: String? = nil
 
     // Progreso de carga por playlist: name → (loaded, total)
@@ -50,6 +52,10 @@ struct MainView: View {
                 .environment(settings)
                 .environment(plexAPI)
                 .frame(width: 500)
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView()
+                .environment(entitlement)
         }
         .task { await loadPlaylistNames() }
     }
@@ -192,6 +198,27 @@ struct MainView: View {
                 Text(settings.plexServerURL)
                     .font(.caption)
                     .foregroundStyle(.secondary)
+            }
+        }
+        ToolbarItem(placement: .primaryAction) {
+            if entitlement.isPro {
+                Label("Pro", systemImage: "checkmark.seal.fill")
+                    .font(.caption.bold())
+                    .foregroundStyle(Color.accentColor)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(Color.accentColor.opacity(0.15), in: Capsule())
+                    .help("You have Music2PLX Pro")
+            } else {
+                Button {
+                    showPaywall = true
+                } label: {
+                    Label("Upgrade to Pro", systemImage: "sparkles")
+                        .labelStyle(.titleAndIcon)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.small)
+                .help("Unlock unlimited imports")
             }
         }
         ToolbarItem(placement: .primaryAction) {

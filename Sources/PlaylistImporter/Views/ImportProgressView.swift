@@ -2,8 +2,9 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct ImportProgressView: View {
-    @Environment(ImportManager.self) private var importManager
-    @Environment(AppSettings.self)   private var settings
+    @Environment(ImportManager.self)      private var importManager
+    @Environment(AppSettings.self)        private var settings
+    @Environment(EntitlementManager.self) private var entitlement
 
     @Binding var selectedNames: Set<String>
     @Binding var duplicateAction: DuplicateAction
@@ -12,14 +13,16 @@ struct ImportProgressView: View {
 
     @State private var exportItem: CSVDocument?
     @State private var showExporter = false
+    @State private var showPaywall  = false
 
     var body: some View {
         VStack(spacing: 0) {
             // Title bar
-            HStack {
+            HStack(spacing: 10) {
                 Text("Import")
                     .font(.headline)
                 Spacer()
+                entitlementPill
                 // Reset button cuando hay algo que limpiar
                 if importManager.step == .done || importManager.step == .failed || importManager.step == .cancelled {
                     Button("New Import") {
@@ -62,6 +65,10 @@ struct ImportProgressView: View {
             contentType: .commaSeparatedText,
             defaultFilename: "playlist-import-log"
         ) { _ in }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView()
+                .environment(entitlement)
+        }
     }
 
     // MARK: - Settings Section
@@ -109,15 +116,53 @@ struct ImportProgressView: View {
                 }
 
                 Button {
-                    onImport()
+                    if entitlement.canImport {
+                        onImport()
+                    } else {
+                        showPaywall = true
+                    }
                 } label: {
-                    Label("Start Import", systemImage: "arrow.up.circle.fill")
+                    Label(entitlement.canImport ? "Start Import" : "Upgrade to Pro to Import",
+                          systemImage: entitlement.canImport ? "arrow.up.circle.fill" : "lock.fill")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(selectedNames.isEmpty || selectedPlaylists.count != selectedNames.count)
                 .help(selectedPlaylists.count != selectedNames.count ? "Open each selected playlist to load its tracks first" : "")
+
+                if !entitlement.isPro {
+                    Text("\(entitlement.freeImportsRemaining) free import\(entitlement.freeImportsRemaining == 1 ? "" : "s") remaining")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
             }
+        }
+    }
+
+    // MARK: - Entitlement pill
+
+    @ViewBuilder
+    private var entitlementPill: some View {
+        if entitlement.isPro {
+            Label("Pro", systemImage: "checkmark.seal.fill")
+                .font(.caption.bold())
+                .foregroundStyle(Color.accentColor)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 3)
+                .background(Color.accentColor.opacity(0.12), in: Capsule())
+        } else {
+            Button {
+                showPaywall = true
+            } label: {
+                Label("Upgrade", systemImage: "sparkles")
+                    .font(.caption.bold())
+                    .foregroundStyle(Color.accentColor)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(Color.accentColor.opacity(0.12), in: Capsule())
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -172,6 +217,21 @@ struct ImportProgressView: View {
                         Text("Loading Plex library (\(Int(importManager.plexLoadProgress * 100))%)")
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                    } else if importManager.step == .buildingIndex {
+                        Text("Building search index…")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    } else if importManager.step == .matching && importManager.currentTrackTotal > 0 {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Matching track \(importManager.currentTrackIndex) / \(importManager.currentTrackTotal)")
+                                .font(.caption.monospacedDigit())
+                                .foregroundStyle(.secondary)
+                            if importManager.currentTrackTotal >= 1_000 {
+                                Text("Large playlist — this can take a few minutes")
+                                    .font(.caption2)
+                                    .foregroundStyle(.tertiary)
+                            }
+                        }
                     }
                 }
             }

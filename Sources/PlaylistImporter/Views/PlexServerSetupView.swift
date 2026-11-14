@@ -54,13 +54,18 @@ struct PlexServerSetupView: View {
 
     private var serverSection: some View {
         Section {
-            TextField("http://192.168.1.100:32400", text: $serverURLInput)
-                .textFieldStyle(.plain)
-                .foregroundStyle(.primary)
-                .onSubmit { saveServerURL() }
-                .onChange(of: serverURLInput) { saveServerURL() }
+            HStack {
+                TextField(
+                    text: $serverURLInput,
+                    prompt: Text("http://192.168.1.100:32400")
+                ) { EmptyView() }
+                    .textFieldStyle(.roundedBorder)
+                    .onSubmit { saveServerURL() }
+                    .onChange(of: serverURLInput) { saveServerURL() }
+            }
+            .frame(maxWidth: .infinity)
         } header: {
-            Text("Plex Server URL")
+            Text("Plex Server URL (Use local URL)")
         } footer: {
             Text("The local address of your Plex Media Server. Include port 32400.")
                 .foregroundStyle(.secondary)
@@ -118,22 +123,47 @@ struct PlexServerSetupView: View {
 
     private var pathMappingSection: some View {
         Section {
-            LabeledContent("iTunes / Mac prefix") {
-                TextField("/Volumes/music", text: $localPrefixInput)
-                    .textFieldStyle(.plain)
-                    .onSubmit { savePathMapping() }
-                    .onChange(of: localPrefixInput) { savePathMapping() }
+            VStack(alignment: .leading, spacing: 6) {
+                Text("iTunes / Mac prefix")
+                    .font(.subheadline)
+                Text("The folder where your music files are stored on this Mac.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                HStack {
+                    TextField(
+                        text: $localPrefixInput,
+                        prompt: Text("/Users/yourname/Music")
+                    ) { EmptyView() }
+                        .textFieldStyle(.roundedBorder)
+                        .onSubmit { savePathMapping() }
+                        .onChange(of: localPrefixInput) { savePathMapping() }
+                }
+                .frame(maxWidth: .infinity)
             }
-            LabeledContent("Plex server prefix") {
-                TextField("/data/music", text: $plexPrefixInput)
-                    .textFieldStyle(.plain)
-                    .onSubmit { savePathMapping() }
-                    .onChange(of: plexPrefixInput) { savePathMapping() }
+            .padding(.vertical, 4)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Plex server prefix")
+                    .font(.subheadline)
+                Text("In Plex, go to your Music library → Edit Library → Add folders. Copy the folder path shown there.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                HStack {
+                    TextField(
+                        text: $plexPrefixInput,
+                        prompt: Text("/data/music")
+                    ) { EmptyView() }
+                        .textFieldStyle(.roundedBorder)
+                        .onSubmit { savePathMapping() }
+                        .onChange(of: plexPrefixInput) { savePathMapping() }
+                }
+                .frame(maxWidth: .infinity)
             }
+            .padding(.vertical, 4)
         } header: {
             Text("Path Mapping")
         } footer: {
-            Text("If your music files are mounted differently on the Plex server, map the path prefix here. Leave Plex prefix empty if the paths are identical.")
+            Text("Leave Plex prefix empty if paths are identical on both machines.")
                 .foregroundStyle(.secondary)
         }
     }
@@ -177,7 +207,7 @@ struct PlexServerSetupView: View {
                 Button("Detect Music Libraries") {
                     Task { await fetchSections() }
                 }
-                .disabled(!settings.isAuthenticated)
+                .disabled(!settings.isAuthenticated || settings.plexServerURL.isEmpty)
             } else {
                 Picker("Music library", selection: Binding(
                     get: { settings.plexLibrarySectionID },
@@ -193,6 +223,12 @@ struct PlexServerSetupView: View {
                     .buttonStyle(.plain)
                     .font(.caption)
                     .foregroundStyle(.secondary)
+            }
+
+            if settings.isAuthenticated && settings.plexServerURL.isEmpty {
+                Label("Enter your Plex Server URL above before detecting libraries.", systemImage: "exclamationmark.triangle.fill")
+                    .foregroundStyle(.orange)
+                    .font(.caption)
             }
 
             if let error = sectionFetchError {

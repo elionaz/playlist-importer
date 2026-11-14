@@ -6,14 +6,18 @@ enum StringSimilarity {
 
     /// Score de similitud normalizado 0.0–1.0 (1.0 = idéntico).
     static func score(_ a: String, _ b: String) -> Double {
-        let na = normalize(a)
-        let nb = normalize(b)
-        guard !na.isEmpty || !nb.isEmpty else { return 1.0 }
-        guard !na.isEmpty, !nb.isEmpty  else { return 0.0 }
-        if na == nb { return 1.0 }
+        scoreNormalized(normalize(a), normalize(b))
+    }
 
-        let dist = levenshtein(na, nb)
-        let maxLen = Double(max(na.count, nb.count))
+    /// Score asumiendo que ambas cadenas YA están normalizadas.
+    /// Úsalo en hot loops para evitar repetir la regex de `normalize` por cada comparación.
+    static func scoreNormalized(_ a: String, _ b: String) -> Double {
+        guard !a.isEmpty || !b.isEmpty else { return 1.0 }
+        guard !a.isEmpty, !b.isEmpty  else { return 0.0 }
+        if a == b { return 1.0 }
+
+        let dist = levenshtein(a, b)
+        let maxLen = Double(max(a.count, b.count))
         return max(0, 1.0 - Double(dist) / maxLen)
     }
 

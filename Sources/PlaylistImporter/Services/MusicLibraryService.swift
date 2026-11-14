@@ -114,7 +114,10 @@ enum MusicLibraryError: LocalizedError {
 
     private nonisolated static func convertItem(_ item: ITLibMediaItem) -> MusicTrack? {
         guard item.mediaKind == .kindSong else { return nil }
-        let persistentID = String(format: "%llX", item.persistentID)
+        // En macOS 26+ `ITLibMediaItem.persistentID` se entrega como NSNumber y
+        // Swift ya no auto-desempaqueta para `String(format:)`, así que la API
+        // numérica directa es la única que funciona en ambas versiones.
+        let persistentID = String(item.persistentID.uint64Value, radix: 16, uppercase: true)
         let title = item.title
         guard !persistentID.isEmpty, !title.isEmpty else { return nil }
         return MusicTrack(

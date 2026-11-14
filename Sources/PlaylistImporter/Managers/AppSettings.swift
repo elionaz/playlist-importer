@@ -48,7 +48,7 @@ import Observation
         self.plexLibrarySectionID  = UserDefaults.standard.string(forKey: "plexLibrarySectionID") ?? ""
         self.plexMachineIdentifier = UserDefaults.standard.string(forKey: "plexMachineIdentifier") ?? ""
         self.soundEnabled          = UserDefaults.standard.object(forKey: "soundEnabled") as? Bool ?? true
-        self.localPathPrefix       = UserDefaults.standard.string(forKey: "localPathPrefix") ?? "/Volumes/music"
+        self.localPathPrefix       = UserDefaults.standard.string(forKey: "localPathPrefix") ?? ""
         self.plexPathPrefix        = UserDefaults.standard.string(forKey: "plexPathPrefix") ?? ""
         // Migrar token viejo desde Keychain si existe
         if let legacy = KeychainHelper.load(forKey: "plexToken") {

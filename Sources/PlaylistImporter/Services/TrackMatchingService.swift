@@ -19,6 +19,11 @@ enum TrackMatchingService {
     private static let wDuration: Double = 0.10
     private static let bonusYear: Double = 0.05
 
+    // Límite duro de candidatos para el fallback por título.
+    private static let titleFallbackLimit: Int = 200
+    private static let artistSimilarityThreshold: Double = 0.75
+    private static let titleFallbackThreshold:    Double = 0.70
+
     // MARK: - Index Building
 
     static func buildIndex(
@@ -26,8 +31,10 @@ enum TrackMatchingService {
         localPrefix: String,
         plexPrefix: String
     ) -> MatchIndex {
-        var pathIndex:   [String: PlexTrack]     = [:]
-        var artistIndex: [String: [PlexTrack]]   = [:]
+        var pathIndex:   [String: PlexTrack]            = [:]
+        var artistIndex: [String: [PlexTrackNorm]]      = [:]
+        var allNorm:     [PlexTrackNorm]                = []
+        allNorm.reserveCapacity(plexTracks.count)
 
         for track in plexTracks {
             // L1 path index
@@ -36,17 +43,24 @@ enum TrackMatchingService {
                 pathIndex[normalized] = track
             }
 
-            // L2 artist bucket (normalized)
-            let artistKey = StringSimilarity.normalize(track.artist)
-            if !artistKey.isEmpty {
-                artistIndex[artistKey, default: []].append(track)
+            // Pre-normalizar para evitar miles de regex en el hot loop
+            let norm = PlexTrackNorm(
+                track:      track,
+                normTitle:  StringSimilarity.normalize(track.title),
+                normArtist: StringSimilarity.normalize(track.artist),
+                normAlbum:  StringSimilarity.normalize(track.album)
+            )
+
+            if !norm.normArtist.isEmpty {
+                artistIndex[norm.normArtist, default: []].append(norm)
             }
+            allNorm.append(norm)
         }
 
         return MatchIndex(
             pathIndex:   pathIndex,
             artistIndex: artistIndex,
-            allTracks:   plexTracks,
+            allTracks:   allNorm,
             localPrefix: localPrefix,
             plexPrefix:  plexPrefix
         )
@@ -69,27 +83,54 @@ enum TrackMatchingService {
             }
         }
 
-        // ── L2: fuzzy metadata ──────────────────────────────────────────────
-        return matchL2(track, index: index)
+        // ── L2: pre-normalizar el MusicTrack una sola vez ───────────────────
+        let normTrack = MusicTrackNorm(
+            normTitle:  StringSimilarity.normalize(track.title),
+            normArtist: StringSimilarity.normalize(track.artist),
+            normAlbum:  StringSimilarity.normalize(track.album),
+            durationMs: track.durationMs,
+            year:       track.year
+        )
+        return matchL2(normTrack, index: index)
     }
 
-    static func matchAll(tracks: [MusicTrack], index: MatchIndex) -> [String: MatchResult] {
+    /// Matchea un batch de tracks. Diseñado para correr en background — no toca MainActor.
+    /// `onProgress` se invoca periódicamente con el índice actual; el caller decide cómo publicar.
+    static func matchAll(
+        tracks: [MusicTrack],
+        index: MatchIndex,
+        onProgress: (@Sendable (Int) -> Void)? = nil
+    ) -> [String: MatchResult] {
         var results: [String: MatchResult] = [:]
-        for track in tracks {
-            results[track.persistentID] = match(track, index: index)
+        results.reserveCapacity(tracks.count)
+
+        // Procesamos en chunks envueltos en autoreleasepool para drenar los
+        // NSString/NSRegularExpression que Foundation deja atrás.
+        let chunk = 100
+        var i = 0
+        while i < tracks.count {
+            let end = Swift.min(i + chunk, tracks.count)
+            autoreleasepool {
+                for j in i..<end {
+                    let track = tracks[j]
+                    results[track.persistentID] = match(track, index: index)
+                }
+            }
+            onProgress?(end)
+            i = end
         }
         return results
     }
 
     // MARK: - L2 Implementation
 
-    private static func matchL2(_ track: MusicTrack, index: MatchIndex) -> MatchResult {
+    private static func matchL2(_ track: MusicTrackNorm, index: MatchIndex) -> MatchResult {
         let candidates = findCandidates(for: track, index: index)
         guard !candidates.isEmpty else { return .unmatched }
 
-        // Score cada candidato
-        let scored = candidates
-            .map { ($0, metadataScore(track: track, plex: $0)) }
+        // Score cada candidato usando strings YA normalizados.
+        let scored: [(PlexTrack, Double)] = candidates
+            .map { ($0.track, metadataScoreNorm(track: track, plex: $0)) }
             .filter { $0.1 >= ambiguousThreshold }
             .sorted { $0.1 > $1.1 }
 
@@ -108,47 +149,76 @@ enum TrackMatchingService {
     }
 
     /// Obtiene candidatos del artistIndex + fallback al catálogo completo si no hay artista.
-    private static func findCandidates(for track: MusicTrack, index: MatchIndex) -> [PlexTrack] {
-        let normArtist = StringSimilarity.normalize(track.artist)
+    private static func findCandidates(for track: MusicTrackNorm, index: MatchIndex) -> [PlexTrackNorm] {
+        let normArtist = track.normArtist
 
-        // Búsqueda exacta por artista normalizado
+        // 1) Match exacto por artista normalizado (sin regex, sin allocs extra).
         if !normArtist.isEmpty, let exact = index.artistIndex[normArtist] {
             return exact
         }
 
-        // Búsqueda por similitud de artista (toma los buckets con score > 0.75)
+        // 2) Búsqueda por similitud de artista entre los buckets — sin re-normalizar.
         if !normArtist.isEmpty {
-            let similar = index.artistIndex
-                .filter { StringSimilarity.score($0.key, normArtist) > 0.75 }
-                .flatMap { $0.value }
+            var similar: [PlexTrackNorm] = []
+            for (key, bucket) in index.artistIndex {
+                if StringSimilarity.scoreNormalized(key, normArtist) > artistSimilarityThreshold {
+                    similar.append(contentsOf: bucket)
+                }
+            }
             if !similar.isEmpty { return similar }
         }
 
-        // Sin artista o ningún match de artista → buscar solo por título en todo el catálogo
-        // (limitado a los primeros 200 candidatos por título para no ser O(n))
-        let normTitle = StringSimilarity.normalize(track.title)
-        return index.allTracks
-            .filter { StringSimilarity.score(StringSimilarity.normalize($0.title), normTitle) > 0.70 }
-            .prefix(200)
-            .map { $0 }
+        // 3) Fallback por título sobre todo el catálogo, con corte temprano.
+        //    `index.allTracks` ya tiene normTitle precomputado, así que solo
+        //    se ejecuta Levenshtein — nada de regex aquí.
+        let normTitle = track.normTitle
+        guard !normTitle.isEmpty else { return [] }
+
+        var results: [PlexTrackNorm] = []
+        results.reserveCapacity(titleFallbackLimit)
+        for p in index.allTracks {
+            if StringSimilarity.scoreNormalized(p.normTitle, normTitle) > titleFallbackThreshold {
+                results.append(p)
+                if results.count >= titleFallbackLimit { break }
+            }
+        }
+        return results
     }
 
-    // MARK: - Metadata Score
+    // MARK: - Metadata Score (public — usado por tests y por matching)
 
     /// Score ponderado 0.0–1.0+bonus entre un MusicTrack y un PlexTrack.
+    /// API pública: normaliza ambos lados al vuelo (úsala fuera de hot loops).
     static func metadataScore(track: MusicTrack, plex: PlexTrack) -> Double {
-        let titleScore  = StringSimilarity.score(track.title,  plex.title)
-        let artistScore = StringSimilarity.score(track.artist, plex.artist)
-        let albumScore  = StringSimilarity.score(track.album,  plex.album)
-        let durScore    = DurationCompare.score(trackMs: track.durationMs, plexMs: plex.duration)
+        let normTrack = MusicTrackNorm(
+            normTitle:  StringSimilarity.normalize(track.title),
+            normArtist: StringSimilarity.normalize(track.artist),
+            normAlbum:  StringSimilarity.normalize(track.album),
+            durationMs: track.durationMs,
+            year:       track.year
+        )
+        let normPlex = PlexTrackNorm(
+            track:      plex,
+            normTitle:  StringSimilarity.normalize(plex.title),
+            normArtist: StringSimilarity.normalize(plex.artist),
+            normAlbum:  StringSimilarity.normalize(plex.album)
+        )
+        return metadataScoreNorm(track: normTrack, plex: normPlex)
+    }
+
+    /// Variante interna que asume los strings ya normalizados.
+    private static func metadataScoreNorm(track: MusicTrackNorm, plex: PlexTrackNorm) -> Double {
+        let titleScore  = StringSimilarity.scoreNormalized(track.normTitle,  plex.normTitle)
+        let artistScore = StringSimilarity.scoreNormalized(track.normArtist, plex.normArtist)
+        let albumScore  = StringSimilarity.scoreNormalized(track.normAlbum,  plex.normAlbum)
+        let durScore    = DurationCompare.score(trackMs: track.durationMs, plexMs: plex.track.duration)
 
         var score = titleScore  * wTitle
                   + artistScore * wArtist
                   + albumScore  * wAlbum
                   + durScore    * wDuration
 
-        // Bonus por año exacto
-        if let ty = track.year, let py = plex.year, ty == py {
+        if let ty = track.year, let py = plex.track.year, ty == py {
             score += bonusYear
         }
 
@@ -184,12 +254,29 @@ enum TrackMatchingService {
     }
 }
 
+// MARK: - Normalized projections
+
+struct PlexTrackNorm: Sendable {
+    let track:      PlexTrack
+    let normTitle:  String
+    let normArtist: String
+    let normAlbum:  String
+}
+
+struct MusicTrackNorm: Sendable {
+    let normTitle:  String
+    let normArtist: String
+    let normAlbum:  String
+    let durationMs: Int
+    let year:       Int?
+}
+
 // MARK: - MatchIndex
 
 struct MatchIndex: Sendable {
     let pathIndex:   [String: PlexTrack]
-    let artistIndex: [String: [PlexTrack]]  // normalized artist → tracks (para L2)
-    let allTracks:   [PlexTrack]
+    let artistIndex: [String: [PlexTrackNorm]]  // normalized artist → tracks (para L2)
+    let allTracks:   [PlexTrackNorm]
     let localPrefix: String
     let plexPrefix:  String
 
