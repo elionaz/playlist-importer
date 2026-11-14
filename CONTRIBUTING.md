@@ -6,8 +6,8 @@ Thanks for your interest in improving Music2PLX! This document explains how to p
 
 - **`main` is protected.** Nobody pushes to it directly. Every change lands through a Pull Request.
 - **Every PR needs approval from the maintainer ([@elionaz](https://github.com/elionaz))** before it can be merged (enforced via `CODEOWNERS` + branch protection).
-- All review conversations must be resolved before merging.
-- PRs must be up to date with `main` before merging.
+- All review conversations must be resolved before merging, and new pushes after an approval require a fresh approval.
+- History on `main` is linear: PRs are squash-merged.
 - Be respectful — see the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Workflow
