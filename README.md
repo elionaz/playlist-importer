@@ -32,6 +32,57 @@ Music2PLX reads your playlists from Apple Music and finds each track in your Ple
 
 ---
 
+## Installation
+
+### Option A — Download the app (easiest)
+
+1. Go to the [**Releases**](https://github.com/elionaz/playlist-importer/releases/latest) page and download `Music2PLX-<version>-macOS.zip`.
+2. Double-click the zip to extract **Music2PLX.app** and move it to your **Applications** folder.
+3. **First launch:** the release build is *ad-hoc signed* (not notarized by Apple), so macOS Gatekeeper will block it the first time. Use one of these:
+   - **Right-click** (or Control-click) **Music2PLX.app → Open**, then click **Open** in the dialog. On macOS 15+, if there is no *Open* button, go to **System Settings → Privacy & Security**, scroll down and click **Open Anyway**.
+   - Or remove the quarantine flag from Terminal:
+     ```bash
+     xattr -dr com.apple.quarantine /Applications/Music2PLX.app
+     ```
+4. Grant the permissions the app asks for: **Media & Apple Music** and **Local Network**.
+
+The build is Universal (Apple Silicon + Intel). You can check the download against the `SHA256SUMS.txt` attached to each release:
+
+```bash
+shasum -a 256 Music2PLX-*-macOS.zip
+```
+
+### Option B — Build from source
+
+Requirements: macOS 14+, **Xcode 16+** (Swift 6).
+
+```bash
+git clone https://github.com/elionaz/playlist-importer.git
+cd playlist-importer
+open PlaylistImporter.xcodeproj
+```
+
+In Xcode select the **PlaylistImporter** scheme and press **⌘R**. If Xcode complains about signing, open the target's **Signing & Capabilities** tab and choose your own team (or *Sign to Run Locally*).
+
+Command-line build (ad-hoc signed, no Apple account needed):
+
+```bash
+xcodebuild -project PlaylistImporter.xcodeproj -scheme PlaylistImporter \
+  -configuration Release -derivedDataPath build \
+  ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO \
+  CODE_SIGN_IDENTITY="-" CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM="" \
+  build
+open build/Build/Products/Release/Music2PLX.app
+```
+
+Run the tests:
+
+```bash
+swift test
+```
+
+---
+
 ## Setup
 
 ### 1. Connect to Plex
@@ -103,3 +154,13 @@ Sources/PlaylistImporter/
 ├── Services/         # MusicLibraryService, PlexAPIService, PlexAuthService, PlexHTTPClient, TrackMatchingService
 └── Views/            # SwiftUI views
 ```
+
+---
+
+## Contributing
+
+Contributions are welcome! Read [CONTRIBUTING.md](CONTRIBUTING.md) first. All PRs into `main` need the maintainer's review and approval.
+
+## License
+
+[MIT](LICENSE) © elionaz

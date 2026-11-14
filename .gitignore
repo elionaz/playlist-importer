@@ -23,3 +23,9 @@ Thumbs.db
 
 # Generated
 gen_xcodeproj.py
+
+# Local build output / tooling
+build/
+dist/
+.omc/
+.claude/settings.local.json

@@ -7,17 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F1A2B3C4D5E6F7A8B9C0D1E2 /* iTunesLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2 /* iTunesLibrary.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		0020FFE4DA815BCEA11A3228 /* PlexPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB33E40A83C596EA96A100D /* PlexPlaylist.swift */; };
 		074F292C24DA552BAC780329 /* PlexServerSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F501305985B618634443B /* PlexServerSetupView.swift */; };
-		A1B2C3D4E5F6A7B8C9D0E1F4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D3E4F5A6B7C8D9E0F1A2 /* OnboardingView.swift */; };
 		0C1D945B6B9E5F748D6CEDA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D5FA3C32D55E26BF5F7C8F /* ContentView.swift */; };
 		0C695802A37A5AC4AF492751 /* StringSimilarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9C1FF026856C9AFA791BC /* StringSimilarity.swift */; };
 		138686503A425139B71C0CD5 /* MusicTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7E6CF9CD152C1AADF2596 /* MusicTrack.swift */; };
 		13CC9678CE815AE3B5A758FB /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E0C6C543925799A629191E /* AppSettings.swift */; };
 		2378F10D58495FA6827CC071 /* DurationCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7AFF80B9055AAEA857844E /* DurationCompare.swift */; };
-		E1A2B3C4D5E6F7A8B9C0D1E3 /* LocalNetworkPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A2B3C4E5F6A7B8C9D0E1F3 /* LocalNetworkPermission.swift */; };
-		F2A3B4C5D6E7F8A9B0C1D2E4 /* PlexHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A3B4C5D6E7F8A9B0C1D2E4 /* PlexHTTPClient.swift */; };
 		335EDE1695A550D58E09A58B /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3246D546295353728A82F8E3 /* TrackListView.swift */; };
 		34462ED51704588EAA0BF713 /* ImportProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4C8534D30E59F5A5C905B3 /* ImportProgressView.swift */; };
 		47B87337D928567E985B7260 /* MusicLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5489E4CA1205486BFC45F2A /* MusicLibraryService.swift */; };
@@ -27,47 +23,55 @@
 		88960FE256195F46BF86D676 /* PlexAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC69D0530205D9B95467224 /* PlexAPIService.swift */; };
 		907A0531F21957EE9361C696 /* TrackMatchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7026B01B335DA2B57EBD18 /* TrackMatchingService.swift */; };
 		996FF6E62B0253FEACB3616D /* PlexLibrarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A8AEF5B4845A2E815A4EC3 /* PlexLibrarySection.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D3E4F5A6B7C8D9E0F1A2 /* OnboardingView.swift */; };
 		A784A1D0023A5CC9AEC61419 /* PlexTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CE0D6834F854C2A0BDCBCC /* PlexTrack.swift */; };
 		AA001122334455667788AABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA001122334455667788AA00 /* Assets.xcassets */; };
 		C1BE5A0FB8A3540FA9555145 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D96816509544C9CEB9703 /* KeychainHelper.swift */; };
 		C23BB6A354335647A4FCD863 /* ImportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439DCFBBDC756E0AE35D044 /* ImportManager.swift */; };
 		CA469587DB31537A84368C76 /* PlaylistImporterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112BB6008D245698BEFDCA54 /* PlaylistImporterApp.swift */; };
+		D4422C6F2FB2915600432AC9 /* EntitlementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4422C6E2FB2915600432AC9 /* EntitlementManager.swift */; };
+		D4422C712FB2916F00432AC9 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4422C702FB2916F00432AC9 /* PaywallView.swift */; };
+		E1A2B3C4D5E6F7A8B9C0D1E3 /* LocalNetworkPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A2B3C4E5F6A7B8C9D0E1F3 /* LocalNetworkPermission.swift */; };
 		EFE67A56E0C153ADAF5FBBBD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D185D39695521691331FCB /* MainView.swift */; };
+		F1A2B3C4D5E6F7A8B9C0D1E2 /* iTunesLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2 /* iTunesLibrary.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		F2A3B4C5D6E7F8A9B0C1D2E4 /* PlexHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A3B4C5D6E7F8A9B0C1D2E4 /* PlexHTTPClient.swift */; };
 		F58B82FB674A5F2EB5DAC100 /* PlaylistPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D0B6D7219C5886A338E675 /* PlaylistPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A1B2C3D4E5F6A7B8C9D0E1F2 /* iTunesLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iTunesLibrary.framework; path = System/Library/Frameworks/iTunesLibrary.framework; sourceTree = SDKROOT; };
-		07C7E6CF9CD152C1AADF2596 /* MusicTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicTrack.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/MusicTrack.swift"; sourceTree = "<absolute>"; };
-		0E3675D250D45EA59ABCB693 /* MusicPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicPlaylist.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/MusicPlaylist.swift"; sourceTree = "<absolute>"; };
+		07C7E6CF9CD152C1AADF2596 /* MusicTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicTrack.swift; path = "Sources/PlaylistImporter/Models/MusicTrack.swift"; sourceTree = SOURCE_ROOT; };
+		0E3675D250D45EA59ABCB693 /* MusicPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicPlaylist.swift; path = "Sources/PlaylistImporter/Models/MusicPlaylist.swift"; sourceTree = SOURCE_ROOT; };
 		0F9A575FFD1754D789609049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		112BB6008D245698BEFDCA54 /* PlaylistImporterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistImporterApp.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/PlaylistImporterApp.swift"; sourceTree = "<absolute>"; };
-		16D185D39695521691331FCB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/MainView.swift"; sourceTree = "<absolute>"; };
-		1FB33E40A83C596EA96A100D /* PlexPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexPlaylist.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/PlexPlaylist.swift"; sourceTree = "<absolute>"; };
+		112BB6008D245698BEFDCA54 /* PlaylistImporterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistImporterApp.swift; path = "Sources/PlaylistImporter/PlaylistImporterApp.swift"; sourceTree = SOURCE_ROOT; };
+		16D185D39695521691331FCB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = "Sources/PlaylistImporter/Views/MainView.swift"; sourceTree = SOURCE_ROOT; };
+		1FB33E40A83C596EA96A100D /* PlexPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexPlaylist.swift; path = "Sources/PlaylistImporter/Models/PlexPlaylist.swift"; sourceTree = SOURCE_ROOT; };
 		233E2345949851F987B69789 /* PlaylistImporter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlaylistImporter.entitlements; sourceTree = "<group>"; };
-		B3F42A1C9D8E7056A2C31847 /* PlaylistImporter-Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PlaylistImporter-Release.entitlements"; sourceTree = "<group>"; };
-		3246D546295353728A82F8E3 /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackListView.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/TrackListView.swift"; sourceTree = "<absolute>"; };
+		3246D546295353728A82F8E3 /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackListView.swift; path = "Sources/PlaylistImporter/Views/TrackListView.swift"; sourceTree = SOURCE_ROOT; };
 		34C6E33C92F956BA83173DE5 /* Music2PLX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music2PLX.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		39A8AEF5B4845A2E815A4EC3 /* PlexLibrarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexLibrarySection.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/PlexLibrarySection.swift"; sourceTree = "<absolute>"; };
-		431651A3031057BE98C573B1 /* PlexAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexAuthService.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Services/PlexAuthService.swift"; sourceTree = "<absolute>"; };
-		4B7AFF80B9055AAEA857844E /* DurationCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DurationCompare.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Helpers/DurationCompare.swift"; sourceTree = "<absolute>"; };
-		D1A2B3C4E5F6A7B8C9D0E1F3 /* LocalNetworkPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocalNetworkPermission.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Helpers/LocalNetworkPermission.swift"; sourceTree = "<absolute>"; };
-		6DB9C1FF026856C9AFA791BC /* StringSimilarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringSimilarity.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Helpers/StringSimilarity.swift"; sourceTree = "<absolute>"; };
-		799F501305985B618634443B /* PlexServerSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexServerSetupView.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/PlexServerSetupView.swift"; sourceTree = "<absolute>"; };
-		B1C2D3E4F5A6B7C8D9E0F1A2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/OnboardingView.swift"; sourceTree = "<absolute>"; };
-		79D0B6D7219C5886A338E675 /* PlaylistPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistPickerView.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/PlaylistPickerView.swift"; sourceTree = "<absolute>"; };
-		79FD45F669DF57B78CB85F05 /* MatchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MatchResult.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/MatchResult.swift"; sourceTree = "<absolute>"; };
-		8439DCFBBDC756E0AE35D044 /* ImportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImportManager.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Managers/ImportManager.swift"; sourceTree = "<absolute>"; };
-		8F7026B01B335DA2B57EBD18 /* TrackMatchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackMatchingService.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Services/TrackMatchingService.swift"; sourceTree = "<absolute>"; };
-		AA001122334455667788AA00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Assets.xcassets"; sourceTree = "<absolute>"; };
-		D7D5FA3C32D55E26BF5F7C8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/ContentView.swift"; sourceTree = "<absolute>"; };
-		DB5D96816509544C9CEB9703 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Helpers/KeychainHelper.swift"; sourceTree = "<absolute>"; };
-		E5E0C6C543925799A629191E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppSettings.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Managers/AppSettings.swift"; sourceTree = "<absolute>"; };
-		EEC69D0530205D9B95467224 /* PlexAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexAPIService.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Services/PlexAPIService.swift"; sourceTree = "<absolute>"; };
-		C2A3B4C5D6E7F8A9B0C1D2E4 /* PlexHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexHTTPClient.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Services/PlexHTTPClient.swift"; sourceTree = "<absolute>"; };
-		F5489E4CA1205486BFC45F2A /* MusicLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicLibraryService.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Services/MusicLibraryService.swift"; sourceTree = "<absolute>"; };
-		F7CE0D6834F854C2A0BDCBCC /* PlexTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexTrack.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Models/PlexTrack.swift"; sourceTree = "<absolute>"; };
-		FB4C8534D30E59F5A5C905B3 /* ImportProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImportProgressView.swift; path = "/Users/elionaz/Dev/playlist-importer/Sources/PlaylistImporter/Views/ImportProgressView.swift"; sourceTree = "<absolute>"; };
+		39A8AEF5B4845A2E815A4EC3 /* PlexLibrarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexLibrarySection.swift; path = "Sources/PlaylistImporter/Models/PlexLibrarySection.swift"; sourceTree = SOURCE_ROOT; };
+		431651A3031057BE98C573B1 /* PlexAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexAuthService.swift; path = "Sources/PlaylistImporter/Services/PlexAuthService.swift"; sourceTree = SOURCE_ROOT; };
+		4B7AFF80B9055AAEA857844E /* DurationCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DurationCompare.swift; path = "Sources/PlaylistImporter/Helpers/DurationCompare.swift"; sourceTree = SOURCE_ROOT; };
+		6DB9C1FF026856C9AFA791BC /* StringSimilarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringSimilarity.swift; path = "Sources/PlaylistImporter/Helpers/StringSimilarity.swift"; sourceTree = SOURCE_ROOT; };
+		799F501305985B618634443B /* PlexServerSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexServerSetupView.swift; path = "Sources/PlaylistImporter/Views/PlexServerSetupView.swift"; sourceTree = SOURCE_ROOT; };
+		79D0B6D7219C5886A338E675 /* PlaylistPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistPickerView.swift; path = "Sources/PlaylistImporter/Views/PlaylistPickerView.swift"; sourceTree = SOURCE_ROOT; };
+		79FD45F669DF57B78CB85F05 /* MatchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MatchResult.swift; path = "Sources/PlaylistImporter/Models/MatchResult.swift"; sourceTree = SOURCE_ROOT; };
+		8439DCFBBDC756E0AE35D044 /* ImportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImportManager.swift; path = "Sources/PlaylistImporter/Managers/ImportManager.swift"; sourceTree = SOURCE_ROOT; };
+		8F7026B01B335DA2B57EBD18 /* TrackMatchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackMatchingService.swift; path = "Sources/PlaylistImporter/Services/TrackMatchingService.swift"; sourceTree = SOURCE_ROOT; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* iTunesLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iTunesLibrary.framework; path = System/Library/Frameworks/iTunesLibrary.framework; sourceTree = SDKROOT; };
+		AA001122334455667788AA00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Sources/PlaylistImporter/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		B1C2D3E4F5A6B7C8D9E0F1A2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = "Sources/PlaylistImporter/Views/OnboardingView.swift"; sourceTree = SOURCE_ROOT; };
+		C2A3B4C5D6E7F8A9B0C1D2E4 /* PlexHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexHTTPClient.swift; path = "Sources/PlaylistImporter/Services/PlexHTTPClient.swift"; sourceTree = SOURCE_ROOT; };
+		D1A2B3C4E5F6A7B8C9D0E1F3 /* LocalNetworkPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocalNetworkPermission.swift; path = "Sources/PlaylistImporter/Helpers/LocalNetworkPermission.swift"; sourceTree = SOURCE_ROOT; };
+		D4422C6E2FB2915600432AC9 /* EntitlementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntitlementManager.swift; path = Sources/PlaylistImporter/Managers/EntitlementManager.swift; sourceTree = SOURCE_ROOT; };
+		D4422C702FB2916F00432AC9 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaywallView.swift; path = Sources/PlaylistImporter/Views/PaywallView.swift; sourceTree = SOURCE_ROOT; };
+		D4422C722FB291E300432AC9 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		D7D5FA3C32D55E26BF5F7C8F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = "Sources/PlaylistImporter/Views/ContentView.swift"; sourceTree = SOURCE_ROOT; };
+		DB5D96816509544C9CEB9703 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = "Sources/PlaylistImporter/Helpers/KeychainHelper.swift"; sourceTree = SOURCE_ROOT; };
+		E5E0C6C543925799A629191E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppSettings.swift; path = "Sources/PlaylistImporter/Managers/AppSettings.swift"; sourceTree = SOURCE_ROOT; };
+		EEC69D0530205D9B95467224 /* PlexAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexAPIService.swift; path = "Sources/PlaylistImporter/Services/PlexAPIService.swift"; sourceTree = SOURCE_ROOT; };
+		F5489E4CA1205486BFC45F2A /* MusicLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicLibraryService.swift; path = "Sources/PlaylistImporter/Services/MusicLibraryService.swift"; sourceTree = SOURCE_ROOT; };
+		F7CE0D6834F854C2A0BDCBCC /* PlexTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlexTrack.swift; path = "Sources/PlaylistImporter/Models/PlexTrack.swift"; sourceTree = SOURCE_ROOT; };
+		FB4C8534D30E59F5A5C905B3 /* ImportProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImportProgressView.swift; path = "Sources/PlaylistImporter/Views/ImportProgressView.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,7 @@
 		707FFD3BF31C5B55B0F90437 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D4422C6E2FB2915600432AC9 /* EntitlementManager.swift */,
 				E5E0C6C543925799A629191E /* AppSettings.swift */,
 				8439DCFBBDC756E0AE35D044 /* ImportManager.swift */,
 			);
@@ -143,6 +148,7 @@
 		754D0949D96F545493ADFF8A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D4422C702FB2916F00432AC9 /* PaywallView.swift */,
 				D7D5FA3C32D55E26BF5F7C8F /* ContentView.swift */,
 				B1C2D3E4F5A6B7C8D9E0F1A2 /* OnboardingView.swift */,
 				16D185D39695521691331FCB /* MainView.swift */,
@@ -157,8 +163,10 @@
 		871BAB2F288E55F9BDDF08FF = {
 			isa = PBXGroup;
 			children = (
+				D4422C722FB291E300432AC9 /* Configuration.storekit */,
 				43180F2084315839AC3FF2BB /* PlaylistImporter */,
 				7013C57BE10B537FA9AE666A /* Products */,
+				D4422C6D2FB2911600432AC9 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,6 +179,14 @@
 				D1A2B3C4E5F6A7B8C9D0E1F3 /* LocalNetworkPermission.swift */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		D4422C6D2FB2911600432AC9 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* iTunesLibrary.framework */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +219,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					FE1192F904F65CA7BAF45EEF = {
 						CreatedOnToolsVersion = 16.0;
@@ -254,6 +270,7 @@
 				791B3117CF5056DBB7EFDD15 /* PlexAuthService.swift in Sources */,
 				88960FE256195F46BF86D676 /* PlexAPIService.swift in Sources */,
 				F2A3B4C5D6E7F8A9B0C1D2E4 /* PlexHTTPClient.swift in Sources */,
+				D4422C712FB2916F00432AC9 /* PaywallView.swift in Sources */,
 				0C1D945B6B9E5F748D6CEDA8 /* ContentView.swift in Sources */,
 				EFE67A56E0C153ADAF5FBBBD /* MainView.swift in Sources */,
 				074F292C24DA552BAC780329 /* PlexServerSetupView.swift in Sources */,
@@ -265,6 +282,7 @@
 				0020FFE4DA815BCEA11A3228 /* PlexPlaylist.swift in Sources */,
 				996FF6E62B0253FEACB3616D /* PlexLibrarySection.swift in Sources */,
 				138686503A425139B71C0CD5 /* MusicTrack.swift in Sources */,
+				D4422C6F2FB2915600432AC9 /* EntitlementManager.swift in Sources */,
 				73861D5418C35449A076732B /* MusicPlaylist.swift in Sources */,
 				7C8CFCCB77CB5BC7B5284B77 /* MatchResult.swift in Sources */,
 				47B87337D928567E985B7260 /* MusicLibraryService.swift in Sources */,
@@ -282,15 +300,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/PlaylistImporter/PlaylistImporter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = DEPTSNFP99;
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = DEPTSNFP99;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -325,13 +345,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = "Sources/PlaylistImporter/PlaylistImporter-Release.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = DEPTSNFP99;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -360,9 +381,31 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = DEPTSNFP99;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -370,11 +413,19 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -384,13 +435,42 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = DEPTSNFP99;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -406,7 +486,7 @@
 				41A4D95B210B55B086282FF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CA6A12C1D56C571D82ECB417 /* Build configuration list for PBXProject "PlaylistImporter" */ = {
 			isa = XCConfigurationList;
@@ -415,7 +495,7 @@
 				FFA92C19DA58572EAA9B9259 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
