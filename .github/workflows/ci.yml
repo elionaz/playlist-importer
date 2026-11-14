@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Unit tests
+        run: swift test
+
+      - name: Build app (Release, unsigned)
+        run: |
+          xcodebuild -project PlaylistImporter.xcodeproj \
+            -scheme PlaylistImporter \
+            -configuration Release \
+            -derivedDataPath build \
+            ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGN_IDENTITY="-" CODE_SIGN_STYLE=Manual \
+            DEVELOPMENT_TEAM="" PROVISIONING_PROFILE_SPECIFIER="" \
+            build

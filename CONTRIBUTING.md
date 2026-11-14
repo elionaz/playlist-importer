@@ -8,6 +8,7 @@ Thanks for your interest in improving Music2PLX! This document explains how to p
 - **Every PR needs approval from the maintainer ([@elionaz](https://github.com/elionaz))** before it can be merged (enforced via `CODEOWNERS` + branch protection).
 - All review conversations must be resolved before merging, and new pushes after an approval require a fresh approval.
 - History on `main` is linear: PRs are squash-merged.
+- The **CI** check (build + tests on macOS) must pass before merging.
 - Be respectful — see the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Workflow
